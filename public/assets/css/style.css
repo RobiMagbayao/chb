@@ -1,0 +1,141 @@
+:root {
+    --darkest-blue: #04235a;
+    --darker-blue: #064490;
+    --dark-blue: #2686e0;
+    --blue: #41a8f9;
+    --light-blue: #68cafb;
+    --lighter-blue: #aeecfb;
+}
+
+/*home*/
+.home-text {
+    font-family: "Playfair Display", serif;
+}
+
+.text1 {
+    color: var(--darker-blue);
+}
+
+.text2 {
+    letter-spacing: 1px;
+}
+
+.btn-home {
+    background-color: var(--darker-blue) !important;
+    padding: 10px 15px !important;
+}
+
+.btn-home:hover {
+    background-color: var(--dark-blue) !important;
+}
+
+.btn-home a {
+    color: white !important;
+    text-decoration: none;
+}
+
+.image-column {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-column::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0), white);
+    pointer-events: none;
+}
+
+#homeimg {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+}
+
+#homeimg-sm {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.image-column-sm {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-column-sm::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white);
+    pointer-events: none;
+}
+
+.home-xxl {
+    padding-left: 200px;
+}
+
+.home-xxl-btn {
+    position: relative;
+    left: 200px;
+}
+
+/*services*/
+.section-header {
+    font-family: "Playfair Display", serif;
+    color: var(--darker-blue);
+    font-weight: bold !important;
+    letter-spacing: 2px;
+}
+
+.service-card {
+    box-shadow: 0 0 10px lightgray;
+    border: none !important;
+}
+
+.service-card:hover {
+    box-shadow: 0 0 5px var(--dark-blue);
+    border: none !important;
+}
+
+.service-card a {
+    text-decoration: none;
+}
+
+.service-card-header {
+    color: var(--dark-blue) !important;
+    font-family: "Playfair Display", serif;
+    font-weight: bold !important;
+}
+
+.service-card-text {
+    color: var(--darkest-blue);
+    font-family: "Poppins", sans-serif;
+}
+
+.service-card-container {
+    padding: 0 50px !important;
+}
+
+/*area of expertise*/
+.expertise-head {
+    font-family: "Playfair Display", serif;
+    font-weight: bold !important;
+}
+
+.expertise-text {
+    font-family: "Poppins", sans-serif;
+}
+
+.expertise-img-md {
+    object-fit: cover;
+    height: 250px;
+    width: 100%;
+}

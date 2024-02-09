@@ -1,0 +1,32 @@
+:root{
+    --darkest-blue: #04235a;
+    --darker-blue: #064490;
+    --dark-blue: #2686e0;
+    --blue: #41a8f9;
+    --light-blue: #68cafb;
+    --lighter-blue: #aeecfb;
+ }
+
+.locations{
+    font-family: 'Poppins', sans-serif !important; 
+}
+
+.location-list ul{
+    padding: 0;
+}
+
+.location-list ul li{
+    padding-bottom: 10px;
+    list-style: none;
+}
+
+.brand{
+    font-weight: bold;
+    font-size: 1.15rem;
+    font-family: 'Playfair Display', serif;
+    color: var(--dark-blue);
+}
+
+.bi-geo-alt-fill{
+    color: var(--dark-blue);
+}

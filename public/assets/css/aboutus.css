@@ -1,0 +1,93 @@
+:root {
+  --darkest-blue: #04235a;
+  --darker-blue: #064490;
+  --dark-blue: #2686e0;
+  --blue: #41a8f9;
+  --light-blue: #68cafb;
+  --lighter-blue: #aeecfb;
+}
+
+.about-sub-header {
+  color: var(--blue);
+}
+
+.about-sub-header2 {
+  color: var(--lighter-blue);
+}
+
+.about-header {
+  color: var(--darker-blue);
+}
+
+.about-card {
+  border: none !important;
+  box-shadow: 0 0 10px rgb(231, 230, 230);
+}
+
+/*PACKAGES*/
+.card-package {
+  height: fit-content;
+  position: relative;
+  border: none !important;
+  -webkit-transition: 0.5s ease-out;
+  transition: 0.5s ease-out;
+  overflow: visible;
+  background-color: var(--blue) !important;
+}
+
+.card-details {
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-button {
+  text-align: center;
+  -webkit-transform: translate(-50%, 125%);
+  -ms-transform: translate(-50%, 125%);
+  transform: translate(-50%, 125%);
+  width: 70%;
+  border-radius: 1rem;
+  border: none;
+  background-color: var(--darker-blue);
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+  -webkit-transition: 0.3s ease-out;
+  transition: 0.3s ease-out;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif !important;
+}
+
+.card-package:hover .card-button {
+  -webkit-transform: translate(-50%, 50%);
+  -ms-transform: translate(-50%, 50%);
+  transform: translate(-50%, 50%);
+  opacity: 1;
+}
+
+.team-row {
+  background-color: var(--blue);
+}
+
+.team-header {
+  color: white !important;
+}
+
+.card-package-sm {
+  border: none !important;
+  background-color: var(--blue) !important;
+}
+
+.mission-card {
+  margin-top: 170px;
+}
+
+.card-vision {
+  border: none !important;
+  box-shadow: 0 0 10px rgb(231, 230, 230);
+}

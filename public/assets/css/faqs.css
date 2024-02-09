@@ -1,0 +1,42 @@
+:root {
+  --darkest-blue: #04235a;
+  --darker-blue: #064490;
+  --dark-blue: #2686e0;
+  --blue: #41a8f9;
+  --light-blue: #68cafb;
+  --lighter-blue: #aeecfb;
+}
+
+.accordion {
+  --bs-accordion-btn-bg: var(--blue) !important;
+  --bs-accordion-active-bg: var(--dark-blue) !important;
+  --bs-accordion-active-color: white !important;
+  --bs-accordion-btn-focus-box-shadow: none !important;
+  --bs-accordion-bg: rgb(241, 239, 239) !important;
+  --bs-accordion-color: white !important;
+  --bs-accordion-btn-color: white !important;
+  --bs-accordion-btn-active-icon: white !important;
+}
+
+.accordion-body {
+  font-family: "Josefin Sans", sans-serif;
+  color: black !important;
+  font-size: 1.1rem !important;
+  padding-left: 40px !important;
+}
+
+.accordion-button {
+  font-family: "Poppins", sans-serif;
+}
+
+.accordion-button:not(.collapsed) {
+  box-shadow: none !important;
+}
+
+.accordion-button:after {
+  color: white !important;
+}
+
+.accordion-button:before {
+  color: white !important;
+}

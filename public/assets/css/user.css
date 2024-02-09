@@ -1,0 +1,88 @@
+:root {
+    --darkest-blue: #04235a;
+    --darker-blue: #064490;
+    --dark-blue: #2686e0;
+    --blue: #41a8f9;
+    --light-blue: #68cafb;
+    --lighter-blue: #aeecfb;
+}
+
+.userImage {
+    object-fit: cover;
+    width: 110px;
+    height: 110px;
+}
+
+.username {
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+}
+
+.userlink .nav-link {
+    color: var(--darkest-blue) !important;
+    background-color: rgb(237, 237, 237);
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.userlink .nav-link:hover {
+    box-shadow: 0px 0px 2px rgb(125, 125, 125);
+}
+
+.userlink .nav-link:hover {
+    font-weight: bold;
+}
+
+.ActiveOption {
+    color: white !important;
+}
+
+#userOption .nav-link.active.ActiveOption {
+    color: white !important;
+}
+
+/*USER PROFILE TABLE*/
+.userTable {
+    font-family: "Poppins", sans-serif;
+}
+.userImageEdit {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+}
+
+.userDetailHeader td {
+    padding: 10px 0;
+}
+
+.userDetail {
+    padding: ;
+}
+
+/*USER PROFILE*/
+.userDetail {
+    font-size: 0.85rem;
+    color: var(--darker-blue);
+    font-weight: bold;
+}
+
+.form-control {
+    border: 1px solid var(--blue) !important;
+}
+
+.profileDetails {
+    font-size: 1.2rem;
+}
+
+/*quote*/
+
+.tableheader {
+    overflow: scroll;
+    background-color: var(--dark-blue);
+    color: white;
+    padding: 20px 5px;
+}
+
+.quoteEntry {
+    border-bottom: 2px solid var(--blue);
+}
