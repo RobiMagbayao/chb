@@ -10,7 +10,6 @@ use App\Http\Controllers\AdminUsers;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\ContactusController;
 use App\Http\Controllers\FaqController;
-use App\Http\Controllers\GuttercleaningController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PrivatepolicyController;
 use App\Http\Controllers\ServicesController;
@@ -19,8 +18,8 @@ use App\Http\Controllers\UserBookings;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserMessages;
 use App\Http\Controllers\userQuotes;
-use App\Http\Controllers\userUpdateProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QuoteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +40,6 @@ Route::get('/services',[ServicesController::class, 'index'])->name('services.ind
 Route::get('/privatepolicy',[PrivatepolicyController::class, 'index'])->name('privatepolicy.index');
 Route::get('/termsandcondition',[TermsandconditionController::class, 'index'])->name('termsandcondition.index');
 
-Route::get('/guttercleaning',[GuttercleaningController::class, 'index'])->name('guttercleaning.index');
 
 Auth::routes();
 
@@ -141,3 +139,27 @@ Route::middleware(['auth','auth.admin'])->group(function()
 {
     Route::get('admin/users/{id}/delete', [AdminUsers::class,'destroy']);
 });
+
+//QUOTES
+
+Route::get('/gutterguardinstallation',[QuoteController::class, 'Gutterguardinstall']);
+Route::get('/powerwash',[QuoteController::class, 'Powerwash']);
+Route::get('/roofcleaning',[QuoteController::class, 'Roofcleaning']);
+Route::get('/solarpanelcleaning',[QuoteController::class, 'Solarpanelcleaning']);
+Route::get('/windowcleaning',[QuoteController::class, 'Windowcleaning']);
+
+Route::get('/guttercleaning',[QuoteController::class, 'Guttercleaning']);
+Route::post('/guttercleaning',[QuoteController::class, 'store']);
+
+
+
+Route::middleware('auth')->group(function(){
+    Route::get('/quotes', [QuoteController::class, 'index']);
+});
+Route::post('/quotes', [QuoteController::class, 'store']);
+Route::get('/quotes/{quote}', [QuoteController::class, 'show']);
+Route::put('/quotes/{quote}', [QuoteController::class, 'update']);
+Route::delete('/quotes/{quote}', [QuoteController::class, 'destroy']);
+
+// Additional route for changing the status of a quote
+Route::patch('/quotes/{quote}/status', [QuoteController::class, 'changeStatus']);

@@ -21,7 +21,6 @@ class ContactusController extends Controller
             'message' => 'required|min:10',
         ]);
 
-        // Create a new ContactMessage instance and save it to the database
         ContactMessage::create([
             'firstname' => $request->input('firstname'),
             'lastname' => $request->input('lastname'),

@@ -140,7 +140,6 @@
 
           var form = this;
 
-          // AJAX request to submit the form data
           $.ajax({
               url: $(this).attr('action'),
               type: 'POST',
