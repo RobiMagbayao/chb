@@ -35,23 +35,7 @@
         <div
           class="col-lg-6 col-md-6 col-12 mx-auto pt-md-0 pt-4 px-md-0 px-sm-5 px-4"
         >
-        <form action="{{url('/guttercleaning')}}" method="POST" enctype="multipart/form-data">
-            @csrf
-
-            <div class="visually-hidden">
-              <input type="hidden" name="service_type" value="Gutter Cleaning">
-              <input type="hidden" name="user_id" @auth value="{{Auth::user()->id}}" @endauth>
-              <input type="hidden" name="quote_date" value="{{ now()->toDateTimeString() }}">
-              <input type="hidden" name="gutter_size" value="{{ old('gutter_size')}}">
-              <input type="hidden" name="window_qty" value="{{ old('window_qty')}}">
-              <input type="hidden" name="solar_qty" value="{{ old('solar_qty')}}">
-              <input type="hidden" name="with_algae" value="{{ old('with_algae')}}">
-              <input type="hidden" name="type_of_area" value="{{ old('type_of_area')}}">
-              <input type="hidden" name="area_size" value="{{ old('area_size')}}">
-              <input type="hidden" name="price" value="{{ old('price')}}">
-              <input type="hidden" name="status" value="{{ old('status')}}">
-            </div>
-
+          <form>
             <div class="col-md-10 col-sm-11 col-12 mx-auto">
               <label class="form-label fw-bold" for="rooftype"
                 >Select roof type</label
@@ -59,7 +43,7 @@
               <select
                 class="form-select"
                 aria-label="Select roof type"
-                name="type_of_roof"
+                name="roofType"
                 id="roofType"
               >
                 <option value="Ceramic Tiles">Ceramic Tiles</option>
@@ -70,17 +54,17 @@
               </select>
             </div>
             <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto">
-              <label class="form-label fw-bold" for="with_gutter_guard"
-                >Does it have a gutter guard?</label
+              <label class="form-label fw-bold" for="gutterSize"
+                >Select gutter size</label
               >
               <select
                 class="form-select"
                 aria-label="gutter size"
-                name="with_gutter_guard"
-                id="gutter_guard"
+                name="gutterSize"
+                id="gutterSize"
               >
-                <option value="without gutter guard">No, it doesn't have a gutter guard</option>
-                <option value="with gutter guard">Yes, it has a gutter guard</option>
+                <option value="5-inches gutter">5 inches Gutter</option>
+                <option value="6-inches gutter">6 inches Gutter</option>
               </select>
             </div>
             <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto">
@@ -90,23 +74,20 @@
               <select
                 class="form-select"
                 aria-label="gutter length"
-                name="gutter_length"
+                name="gutterLength"
                 id="gutterLength"
               >
                 <option value="not sure">I'm not sure</option>
                 <option value="less than 100 sq ft">
                   Less than 100 sq ft
                 </option>
-                <option value="101-150 sq ft">101-200 sq ft</option>
-                <option value="151-200 sq ft">201-300 sq ft</option>
-                <option value="201-250 sq ft">301-400 sq ft</option>
-                <option value="251-300 sq ft">401-500 sq ft</option>
-                <option value="301-350 sq ft">501-600 sq ft</option>
-                <option value="351-400 sq ft">401-500 sq ft</option>
-                <option value="401-450 sq ft">501-600 sq ft</option>
-                <option value="451-500 sq ft">401-500 sq ft</option>
-                <option value="more than 500 sq ft">
-                  More than 500 sq ft
+                <option value="101-200 sq ft">101-200 sq ft</option>
+                <option value="201-301 sq ft">201-300 sq ft</option>
+                <option value="301-401 sq ft">301-400 sq ft</option>
+                <option value="401-501 sq ft">401-500 sq ft</option>
+                <option value="501-600 sq ft">501-600 sq ft</option>
+                <option value="more than 600 sq ft">
+                  More than 600 sq ft
                 </option>
               </select>
             </div>
@@ -118,19 +99,12 @@
                 class="form-control"
                 type="text"
                 id="propertyAddress"
-                name="address"
+                name="propertyAddress"
                 required
                 pattern=".{10,}"
                 title="Please enter at least 10 characters"
                 placeholder="Enter property address"
-                value="{{ old('address')}}"
               />
-            </div>
-            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto">
-              <label class="form-label fw-bold" for="formFileMultiple"
-                >Upload Photos (Optional)</label
-              >
-              <input class="form-control" type="file" id="formFile1" value="null">
             </div>
             <div class="col-md-10 col-sm-11 col-12 mx-auto my-4">
               <label for="message" class="form-label fw-bold"
@@ -139,11 +113,10 @@
               <textarea
                 class="form-control"
                 id="message"
-                name="comments"
+                name="message"
                 rows="3"
                 minlength="10"
                 placeholder="Write Your Message"
-                value="{{ old('comments')}}"
               ></textarea>
             </div>
             <div class="btns col-10 mx-auto text-center">

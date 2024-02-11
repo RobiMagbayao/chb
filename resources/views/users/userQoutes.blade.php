@@ -40,9 +40,6 @@
           >
             QUOTES
           </div>
-          @if (session('status'))
-              <h6 class="alert alert-success">{{ session('status') }}</h6>
-          @endif
           <div class="row">
             <table>
               <tr class="tableheader p-3">

@@ -28,7 +28,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if ($user->email === 'admin@gmail.com' || $user->user_type === 'ADMIN') {
+        if ($user->user_type === 'ADMIN') {
             return redirect()->route('admin.index');
         }
 

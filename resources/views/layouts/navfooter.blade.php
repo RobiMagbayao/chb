@@ -84,34 +84,34 @@
                       <li>
                         <a
                           class="dropdown-item"
-                          href="{{URL('guttercleaning')}}"
+                          href="{{route('guttercleaning.index')}}"
                           >Gutter Cleaning</a
                         >
                       </li>
                       <li>
                         <a
                           class="dropdown-item"
-                          href="{{URL('gutterguardinstallation')}}"
+                          href="services-gutter-install.html"
                           >Gutter Guard Installation</a
                         >
                       </li>
                       <li>
-                        <a class="dropdown-item" href="{{URL('solarpanelcleaning')}}"
+                        <a class="dropdown-item" href="services-solar.html"
                           >Solar Panel Cleaning</a
                         >
                       </li>
                       <li>
-                        <a class="dropdown-item" href="{{URL('roofcleaning')}}"
+                        <a class="dropdown-item" href="services-roof.html"
                           >Roof Wash</a
                         >
                       </li>
                       <li>
-                        <a class="dropdown-item" href="{{URL('windowcleaning')}}"
+                        <a class="dropdown-item" href="services-window.html"
                           >Window Cleaning</a
                         >
                       </li>
                       <li>
-                        <a class="dropdown-item" href="{{URL('powerwash')}}"
+                        <a class="dropdown-item" href="services-powerwash.html"
                           >Power Wash</a
                         >
                       </li>
