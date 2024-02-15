@@ -11,7 +11,7 @@
           EDIT USER PROFILE
         </div>
           @if (session('status'))
-            <div class="alert alert-success">
+            <div class="alert alert-success text-center fw-bold">
                 {{session('status')}}
             </div>
           @endif

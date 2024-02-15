@@ -3,11 +3,11 @@
 @section('navbar')
 
     <!--user dashbord-->
-    <section class="container nav-margin">
+    <section class="container nav-admin-margin">
       <div class="row">
-        <div class="col-lg-3 col-12 mx-auto mb-4">
+        <div class="col-lg-2 col-12 mx-auto mb-4">
           <div
-            class="col-lg-12 col-md-11 pe-lg-5 pe-0 mx-auto text-center"
+            class="col-lg-12 col-md-11 mx-auto text-center"
           >
           <a class="navbar-brand" href="{{route('app.index')}}">
             <img
@@ -37,7 +37,7 @@
             </nav>
           </div>
         </div>
-        <div class="col-lg-9 col-12">
+        <div class="col-lg-10 col-12  ps-lg-3">
           <div
             class="section-header text-center display-4 fw-bold mb-5 pb-sm-0 pb-0"
           >
@@ -74,9 +74,30 @@
                       <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal"
                               data-bs-target="#deleteUserModal-{{ $item->id }}">
                               Delete
-                          </button>
+                      </button>
                     </td>
                   </tr>
+                  <!-- Modal for Delete User -->
+                  <div class="modal fade" id="deleteUserModal-{{ $item->id }}" tabindex="-1"
+                    aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="deleteUserModalLabel">Delete User</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete user {{$item->email}}?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard
+                                </button>
+                                <a href="{{url('admin/users/'.$item->id.'/delete')}}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                   @endforeach
                 </tbody>
               </table>
@@ -89,27 +110,7 @@
     <!--end of user dashbord-->
 
 
-    <!-- Modal for Delete User -->
-    <div class="modal fade" id="deleteUserModal-{{ $item->id }}" tabindex="-1"
-      aria-labelledby="deleteUserModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="deleteUserModalLabel">Delete User</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal"
-                      aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                  Are you sure you want to delete user {{$item->email}}?
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard
-                  </button>
-                  <a href="{{url('admin/users/'.$item->id.'/delete')}}" class="btn btn-danger">Delete</a>
-              </div>
-          </div>
-      </div>
-  </div>
+    
 
   
 

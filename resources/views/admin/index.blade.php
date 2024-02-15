@@ -3,13 +3,18 @@
 @section('navbar')
 
 <!--admin dashbord-->
-<section id="admin" class=" container nav-margin pb-5">
-    <div class="row">
-      <div class="col-lg-3 col-12 mx-auto mb-4">
-        <div
-          class="col-lg-12 col-md-11 pe-lg-5 pe-0 mt-3 mx-auto text-center"
-        >
-          <div class="text-center h2 pb-4">ADMIN DASHBOARD</div>
+<section class="container nav-admin-margin">
+  <div class="row">
+    <div class="col-lg-2 col-12 mx-auto mb-4">
+      <div
+        class="col-lg-12 col-md-11 mx-auto text-center"
+      >
+      <a class="navbar-brand" href="{{route('app.index')}}">
+        <img
+          src="/assets/images/logo2.png"
+          class="d-inline-block align-top img-fluid"
+          alt="logo"
+      /></a>
           <nav id="adminOptions" class="userlink nav nav-pills flex-column">
             <a
               id="adminHome"
@@ -28,7 +33,7 @@
           </nav>
         </div>
       </div>
-      <div class="col-lg-9 col-12">
+      <div class="col-lg-10 col-12 ps-lg-3">
         <div
           class="section-header text-center display-4 fw-bold mb-5 pb-md-3 pb-sm-0 pb-0"
         >

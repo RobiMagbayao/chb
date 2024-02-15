@@ -3,11 +3,11 @@
 @section('navbar')
 
     <!--user dashbord-->
-    <section class="container nav-margin">
+    <section class="container nav-admin-margin">
       <div class="row">
-        <div class="col-lg-3 col-12 mx-auto mb-4">
+        <div class="col-lg-2 col-12 mx-auto mb-4">
           <div
-            class="col-lg-12 col-md-11 pe-lg-5 pe-0 mx-auto text-center"
+            class="col-lg-12 col-md-11 mx-auto text-center"
           >
           <a class="navbar-brand" href="{{route('app.index')}}">
             <img
@@ -37,7 +37,7 @@
             </nav>
           </div>
         </div>
-        <div class="col-lg-9 col-12">
+        <div class="col-lg-10 col-12  ps-lg-3">
           <div
             class="section-header text-center display-4 fw-bold mb-5 pb-sm-0 pb-0"
           >
@@ -149,14 +149,14 @@
                         @error('address') <span class="text-danger">{{$message}}</span>  @enderror
                     </div>
                 </div>
-        </div>
-        <div class="text-center my-4">
-            <a href="{{url('admin/users')}}" ><button type="button" class="btn btn-secondary">Discard</button></a>
-            
-            <button type="submit" class="btn btn-success ms-2">Save changes</button>
-        </div>
-        </form>
           </div>
+          <div class="text-center my-4">
+              <a href="{{url('admin/users')}}" ><button type="button" class="btn btn-secondary">Discard</button></a>
+              
+              <button type="submit" class="btn btn-success ms-2">Save changes</button>
+          </div>
+          </form>
+            </div>
           <!--
           <div class="row">
             <table>

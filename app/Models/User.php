@@ -46,4 +46,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            if ($user->email === 'admin@gmail.com') {
+                $user->user_type = 'ADMIN';
+            }
+        });
+    }
+
+    public function quotes()
+    {
+        return $this->hasMany(Quote::class);
+    }
+
 }

@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/admin.css')}}" />
 
     <!--favicon-->
-    <link rel="icon" type="image/x-icon" href="{{asset('assets/images/favicon.png')}}" />
+    <link rel="icon" type="image/x-icon" href="{{asset('/assets/images/favicon.png')}}" />
     <!--bootstrap-->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -47,7 +47,7 @@
             <nav class="navbar nav-bar navbar-expand-lg pe-2">
               <a class="navbar-brand ps-lg-3 ps-1 py-2" href="{{route('app.index')}}">
                 <img
-                  src="assets/images/logo1.png"
+                  src="/assets/images/logo1.png"
                   height="50"
                   class="d-inline-block align-top"
                   alt="logo"
@@ -84,34 +84,34 @@
                       <li>
                         <a
                           class="dropdown-item"
-                          href="{{route('guttercleaning.index')}}"
+                          href="{{url('gutter_cleaning')}}"
                           >Gutter Cleaning</a
                         >
                       </li>
                       <li>
                         <a
                           class="dropdown-item"
-                          href="services-gutter-install.html"
+                          href="{{url('gutter_guard_installation')}}"
                           >Gutter Guard Installation</a
                         >
                       </li>
                       <li>
-                        <a class="dropdown-item" href="services-solar.html"
+                        <a class="dropdown-item" href="{{ url('solar_cleaning') }}"
                           >Solar Panel Cleaning</a
                         >
                       </li>
                       <li>
-                        <a class="dropdown-item" href="services-roof.html"
+                        <a class="dropdown-item" href="{{ url('roof_cleaning') }}"
                           >Roof Wash</a
                         >
                       </li>
                       <li>
-                        <a class="dropdown-item" href="services-window.html"
+                        <a class="dropdown-item" href="{{ url('window_cleaning') }}"
                           >Window Cleaning</a
                         >
                       </li>
                       <li>
-                        <a class="dropdown-item" href="services-powerwash.html"
+                        <a class="dropdown-item" href="{{ url('power_wash') }}"
                           >Power Wash</a
                         >
                       </li>

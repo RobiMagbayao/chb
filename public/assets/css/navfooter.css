@@ -41,6 +41,12 @@ body {
     margin-top: 140px;
 }
 
+/*margin for admin*/
+.nav-admin-margin {
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
 /*navbar*/
 .navbar {
     background-color: var(--blue);

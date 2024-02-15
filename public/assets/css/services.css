@@ -1,0 +1,11 @@
+:root {
+    --darkest-blue: #04235a;
+    --darker-blue: #064490;
+    --dark-blue: #2686e0;
+    --blue: #41a8f9;
+    --light-blue: #68cafb;
+    --lighter-blue: #aeecfb;
+}
+.service-border {
+    border-color: var(--blue) !important;
+}

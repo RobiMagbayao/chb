@@ -13,13 +13,12 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\GuttercleaningController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PrivatepolicyController;
+use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\TermsandconditionController;
 use App\Http\Controllers\UserBookings;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserMessages;
-use App\Http\Controllers\userQuotes;
-use App\Http\Controllers\userUpdateProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,9 +48,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/my-bookings',[UserBookings::class,'index'])->name('user.userBookings');
 });
 
-Route::middleware('auth')->group(function(){
-    Route::get('/my-quotes',[UserQuotes::class,'index'])->name('user.userQuotes');
-});
+
 
 Route::middleware('auth')->group(function(){
     Route::get('/my-messages',[UserMessages::class,'index'])->name('user.userMessages');
@@ -75,10 +72,7 @@ Route::middleware(['auth','auth.admin'])->group(function()
     Route::get('/admin/messages',[AdminMessages::class,'index'])->name('admin.adminMessages');
 });
 
-Route::middleware(['auth','auth.admin'])->group(function()
-{
-    Route::get('/admin/quotes',[AdminQuotes::class,'index'])->name('admin.adminQuotes');
-});
+
 
 
 
@@ -140,4 +134,112 @@ Route::middleware(['auth','auth.admin'])->group(function()
 Route::middleware(['auth','auth.admin'])->group(function()
 {
     Route::get('admin/users/{id}/delete', [AdminUsers::class,'destroy']);
+});
+
+
+//QUOTE
+Route::middleware('auth')->group(function(){
+    Route::get('/my-quotes',[QuoteController::class,'index'])->name('user.userQuotes');
+});
+Route::middleware('auth')->group(function(){
+    Route::get('/my-quotes/{id}/delete',[QuoteController::class,'destroy']);
+});
+
+
+//GUTTER CLEANING QUOTE
+Route::middleware('auth')->group(function(){
+    Route::get('gutter_cleaning', [QuoteController::class, 'GutterCleaning']);
+});
+Route::middleware('auth')->group(function(){
+    Route::post('gutter_cleaning', [QuoteController::class, 'store']);
+});
+Route::middleware('auth')->group(function(){
+    Route::get('gutter_cleaning/{id}/edit', [QuoteController::class, 'GutterCleaningEdit']);
+});
+Route::middleware('auth')->group(function(){
+    Route::put('gutter_cleaning/{id}/edit', [QuoteController::class, 'update']);
+});
+
+//GUTTER GUARD INSTALLATION QUOTE
+Route::middleware('auth')->group(function(){
+    Route::get('gutter_guard_installation', [QuoteController::class, 'GutterGuardInstallation']);
+});
+Route::middleware('auth')->group(function(){
+    Route::post('gutter_guard_installation', [QuoteController::class, 'store']);
+});
+Route::middleware('auth')->group(function(){
+    Route::get('gutter_guard_installation/{id}/edit', [QuoteController::class, 'GutterGuardInstallationEdit']);
+});
+Route::middleware('auth')->group(function(){
+    Route::put('gutter_guard_installation/{id}/edit', [QuoteController::class, 'update']);
+});
+
+//POWER WASH QUOTE
+Route::middleware('auth')->group(function(){
+    Route::get('power_wash', [QuoteController::class, 'PowerWash']);
+});
+Route::middleware('auth')->group(function(){
+    Route::post('power_wash', [QuoteController::class, 'store']);
+});
+Route::middleware('auth')->group(function(){
+    Route::get('power_wash/{id}/edit', [QuoteController::class, 'PowerWashEdit']);
+});
+Route::middleware('auth')->group(function(){
+    Route::put('power_wash/{id}/edit', [QuoteController::class, 'update']);
+});
+
+//ROOF CLEANING QUOTE
+Route::middleware('auth')->group(function(){
+    Route::get('roof_cleaning', [QuoteController::class, 'RoofCleaning']);
+});
+Route::middleware('auth')->group(function(){
+    Route::post('roof_cleaning', [QuoteController::class, 'store']);
+});
+Route::middleware('auth')->group(function(){
+    Route::get('roof_cleaning/{id}/edit', [QuoteController::class, 'RoofCleaningEdit']);
+});
+Route::middleware('auth')->group(function(){
+    Route::put('roof_cleaning/{id}/edit', [QuoteController::class, 'update']);
+});
+
+//SOLAR CLEANING QUOTE
+Route::middleware('auth')->group(function(){
+    Route::get('solar_cleaning', [QuoteController::class, 'SolarPanelCleaning']);
+});
+Route::middleware('auth')->group(function(){
+    Route::post('solar_cleaning', [QuoteController::class, 'store']);
+});
+Route::middleware('auth')->group(function(){
+    Route::get('solar_cleaning/{id}/edit', [QuoteController::class, 'SolarCleaningEdit']);
+});
+Route::middleware('auth')->group(function(){
+    Route::put('solar_cleaning/{id}/edit', [QuoteController::class, 'update']);
+});
+
+//WINDOW CLEANING QUOTE
+Route::middleware('auth')->group(function(){
+    Route::get('window_cleaning', [QuoteController::class, 'WindowCleaning']);
+});
+Route::middleware('auth')->group(function(){
+    Route::post('window_cleaning', [QuoteController::class, 'store']);
+});
+Route::middleware('auth')->group(function(){
+    Route::get('window_cleaning/{id}/edit', [QuoteController::class, 'WindowCleaningEdit']);
+});
+Route::middleware('auth')->group(function(){
+    Route::put('window_cleaning/{id}/edit', [QuoteController::class, 'update']);
+});
+
+//ADMIN
+Route::middleware(['auth','auth.admin'])->group(function()
+{
+    Route::get('/admin/quotes',[QuoteController::class,'adminview'])->name('admin.adminQuotes');
+});
+Route::middleware(['auth','auth.admin'])->group(function()
+{
+    Route::get('/admin/quotes/{id}/edit', [QuoteController::class, 'adminedit']);
+});
+Route::middleware(['auth','auth.admin'])->group(function()
+{
+    Route::put('/admin/quotes/{id}/edit', [QuoteController::class, 'adminupdate']);
 });

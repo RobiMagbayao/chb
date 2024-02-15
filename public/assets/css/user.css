@@ -86,3 +86,7 @@
 .quoteEntry {
     border-bottom: 2px solid var(--blue);
 }
+
+#quote-item {
+    border-bottom: 2px solid var(--blue);
+}
