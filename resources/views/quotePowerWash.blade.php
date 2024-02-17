@@ -45,6 +45,11 @@
                   <span class="text-danger">{{$message}}</span>
               @enderror
               <input type="hidden" name="with_personal_info" id="with_personal_info" value="">
+              <input type="text" name="status" value="Pending">
+                @error('status')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+                <input type="text" name="quote" value="Pending">
           </div>   
             <div class="col-md-10 col-sm-11 col-12 mb-3 mx-auto">
               <label class="form-label fw-bold" for="type_of_area"

@@ -26,7 +26,7 @@
               <a class="nav-link" href="{{route('admin.adminQuotes')}}">Quotes</a>
               <a class="nav-link" href="{{route('admin.adminBookings')}}">Bookings</a>
               <a class="nav-link" href="{{route('admin.adminMessages')}}">Messages</a>
-              <a class="nav-link" href="{{route('admin.adminContactus')}}">Contact Us</a>
+              <a class="nav-link" href="{{route('admin.adminContactus')}}">Enquiries</a>
               <a
                 class="nav-link active ActiveOption text-white"
                 href="{{route('admin.adminUsers')}}"
@@ -44,14 +44,11 @@
             ADD USER
           </div>
           @if (session('status'))
-                <div class="alert alert-success">
+                <div class="alert alert-success fw-bold text-center">
                     {{session('status')}}
                 </div>
             @endif
-          <div class="row card">
-            <div class="card-header col-12 mb-3">
-              <a href="{{url('admin/users')}}" class="btn btn-secondary float-end">Back</a>
-            </div>
+          <div class="row">
             <form class="row" action="{{url('admin/users/create')}}" method="POST">
                 @csrf
     
@@ -151,38 +148,12 @@
                 </div>
           </div>
           <div class="text-center my-4">
-              <a href="{{url('admin/users')}}" ><button type="button" class="btn btn-secondary">Discard</button></a>
-              
-              <button type="submit" class="btn btn-success ms-2">Save changes</button>
+            <button type="submit" class="btn btn-success col-lg-3 col-md-4 col-sm-4 col-8 mt-3">Save changes</button><br>
+              <a href="{{url('admin/users')}}" ><button type="button" class="btn btn-secondary col-lg-3 col-md-4 col-sm-4 col-8 mt-3">Discard</button></a>
+
           </div>
           </form>
-            </div>
-          <!--
-          <div class="row">
-            <table>
-              <tr class="tableheader p-3">
-                <th class="col-2 px-1">First Name</th>
-                <th class="col-2 px-1">Last Name</th>
-                <th class="col-2 px-1">Email</th>
-                <th class="col-1 px-1">Phone</th>
-                <th class="col-3 px-1">Address</th>
-                <th class="col-1 px-1">Username</th>
-                <th class="col-1 text-center">Action</th>
-              </tr>
-              <tr class="quoteEntry">
-                <td class="px-1 py-3">Juan</td>
-                <td class="px-1 py-3">Luna</td>
-                <td class="px-1 py-3">123@gmail.com</td>
-                <td class="px-1 py-3">4091234444</td>
-                <td class="px-1 py-3">1234 Bacoor City, Cavite</td>
-                <td class="px-1 py-3">Annala</td>             
-                <td>
-                  <div class="w-100 btn btn-sm my-1 btn-success">Edit</div>
-                  <div class="w-100 btn btn-sm my-1 btn-danger">Delete</div>
-                </td>
-              </tr>
-            </table>
-          </div>-->
+        </div>
 
         </div>
       </div>

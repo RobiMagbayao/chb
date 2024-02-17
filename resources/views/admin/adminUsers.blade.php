@@ -26,7 +26,7 @@
               <a class="nav-link" href="{{route('admin.adminQuotes')}}">Quotes</a>
               <a class="nav-link" href="{{route('admin.adminBookings')}}">Bookings</a>
               <a class="nav-link" href="{{route('admin.adminMessages')}}">Messages</a>
-              <a class="nav-link" href="{{route('admin.adminContactus')}}">Contact Us</a>
+              <a class="nav-link" href="{{route('admin.adminContactus')}}">Enquiries</a>
               <a
                 class="nav-link active ActiveOption text-white"
                 href="{{route('admin.adminUsers')}}"
@@ -39,44 +39,85 @@
         </div>
         <div class="col-lg-10 col-12  ps-lg-3">
           <div
-            class="section-header text-center display-4 fw-bold mb-5 pb-sm-0 pb-0"
+            class="section-header text-center display-4 fw-bold mb-3 pb-sm-0 pb-0"
           >
             USER MANAGEMENT
           </div>
-          <div class="row card">
-            <div class="card-header mb-3">
-              <a href="{{url('admin/users/create')}}" class="btn btn-primary float-end">Add User</a>
-            </div>
-            <div class="card-body">
-              <table class="table table-bordered table-striped">
+          @if (session('status'))
+                <div class="alert alert-success text-center fw-bold">
+                    {{session('status')}}
+                </div>
+            @endif
+            
+            <div class="row">
+              <div class="card-header mb-3">
+                <a href="{{url('admin/users/create')}}" class="btn btn-success float-end">Add User</a>
+              </div>
+              <table>
                 <thead>
-                  <tr>
-                    <th class="text-center">ID</th>
-                    <th class="ps-3">User Details</th>
-                    <th class="text-center">Action</th>
+                  <tr class="tableheader p-3">
+                    <th class="col-1 text-center">User ID</th>
+                    <th class="col-2 p-2">First Name</th>
+                    <th class="col-2 p-2">Last Name</th>
+                    <th class="col-3 p-2">Email</th>
+                    <th class="col-1 text-center">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach ($User as $item )
                   <tr>
                     <td class="text-center">{{$item->id}}</td>
-                    <td class="ps-3">
-                      <strong>First Name: </strong>{{$item->firstname}}<br>
-                      <strong>Last Name: </strong>{{$item->lastname}}<br>
-                      <strong>Email: </strong>{{$item->email}}<br>
-                      <strong>Phone: </strong>{{$item->phone}}<br>
-                      <strong>Address: </strong>{{$item->address}}<br>
-                      <strong>Username: </strong>{{$item->name}}<br>
-                      <strong>Password: </strong>{{$item->password}}<br>
+                    <td class="p-2">{{$item->firstname}}</td>
+                    <td class="p-2">{{$item->lastname}}</td>
+                    <td class="p-2">{{$item->email}}</td>
+                    <td><button type="button" class="btn btn-primary btn-sm w-100" data-bs-toggle="modal"
+                      data-bs-target="#ViewUserModal-{{ $item->id }}">
+                      View
+                      </button>
                     </td>
+                    <!--
                     <td>
-                      <a href="{{url('admin/users/'.$item->id.'/edit')}}" class="btn btn-success w-100 my-2">Update</a><br>
-                      <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal"
+                      <a href="{{url('admin/users/'.$item->id.'/edit')}}" class="btn btn-success btn-sm w-100 my-2">Update</a><br>
+                      <button type="button" class="btn btn-danger btn-sm w-100" data-bs-toggle="modal"
                               data-bs-target="#deleteUserModal-{{ $item->id }}">
                               Delete
                       </button>
                     </td>
+                    
+                    <td class="ps-3">
+                      
+                    </td>
+                  -->
                   </tr>
+                    <!-- Modal for View User -->
+                    <div class="modal fade" id="ViewUserModal-{{ $item->id }}" tabindex="-1"
+                      aria-labelledby="ViewUserModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="ViewUserModalLabel">View User Info</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                      aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <strong>First Name: </strong>{{$item->firstname}}<br>
+                                <strong>Last Name: </strong>{{$item->lastname}}<br>
+                                <strong>Email: </strong>{{$item->email}}<br>
+                                <strong>Phone: </strong>{{$item->phone}}<br>
+                                <strong>Address: </strong>{{$item->address}}<br>
+                                <strong>Username: </strong>{{$item->name}}<br>
+                                <strong>Password: </strong>{{$item->password}}<br>
+                              </div>
+                              <div class="modal-footer">
+                                <a href="{{url('admin/users/'.$item->id.'/edit')}}" class="btn btn-success btn-sm">Update</a><br>
+                                <button type="button" class="btn btn-danger btn-sm " data-bs-toggle="modal"
+                                        data-bs-target="#deleteUserModal-{{ $item->id }}">
+                                        Delete
+                                </button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
                   <!-- Modal for Delete User -->
                   <div class="modal fade" id="deleteUserModal-{{ $item->id }}" tabindex="-1"
                     aria-labelledby="deleteUserModalLabel" aria-hidden="true">
@@ -91,9 +132,9 @@
                                 Are you sure you want to delete user {{$item->email}}?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard
+                              <a href="{{url('admin/users/'.$item->id.'/delete')}}" class="btn btn-sm w-100 btn-danger">Delete</a>
+                                <button type="button" class="btn  btn-sm w-100 btn-secondary" data-bs-dismiss="modal">Discard
                                 </button>
-                                <a href="{{url('admin/users/'.$item->id.'/delete')}}" class="btn btn-danger">Delete</a>
                             </div>
                         </div>
                     </div>

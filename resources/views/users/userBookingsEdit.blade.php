@@ -8,14 +8,14 @@
         <div
           class="section-header text-center display-4 fw-bold mb-5 pb-md-3 pb-sm-0 pb-0"
         >
-          EDIT USER PROFILE
+          BOOKING DETAILS
         </div>
           @if (session('status'))
             <div class="alert alert-success text-center fw-bold">
                 {{session('status')}}
             </div>
           @endif
-          <form class="row" action="{{url('/my-account/edit')}}" method="POST">
+          <form class="row" action="{{url('/my-bookings/edit')}}" method="POST">
             @csrf
             @method('PUT')
             <div class="col-md-6 col-12 px-4 pb-3">

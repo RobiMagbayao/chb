@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade'); 
-            $table->dateTime('quote_date')->nullable();
             $table->string('service_type');
             $table->string('property_address');
             $table->string('type_of_roof')->nullable();

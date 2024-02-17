@@ -45,6 +45,11 @@
                 @error('user_id')
                     <span class="text-danger">{{$message}}</span>
                 @enderror
+                <input type="text" name="status" value="{{$quote->status}}">
+                @error('status')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+                <input type="text" name="quote" value="Pending">
             </div>  
             <div class="col-md-10 col-sm-11 col-12 mx-auto">
               <label class="form-label fw-bold" for="window_qty"

@@ -26,7 +26,7 @@
               <a class="nav-link" href="{{route('admin.adminQuotes')}}">Quotes</a>
               <a class="nav-link" href="{{route('admin.adminBookings')}}">Bookings</a>
               <a class="nav-link" href="{{route('admin.adminMessages')}}">Messages</a>
-              <a class="nav-link" href="{{route('admin.adminContactus')}}">Contact Us</a>
+              <a class="nav-link" href="{{route('admin.adminContactus')}}">Enquiries</a>
               <a
                 class="nav-link active ActiveOption text-white"
                 href="{{route('admin.adminUsers')}}"
@@ -48,10 +48,7 @@
                     {{session('status')}}
                 </div>
             @endif
-          <div class="row card">
-            <div class="card-header col-12 mb-3">
-              <a href="{{url('admin/users')}}" class="btn btn-secondary float-end">Back</a>
-            </div>
+          <div class="row">
             <form class="row" action="{{url('admin/users/'.$User->id.'/edit')}}" method="POST">
                 @csrf
                 @method('PUT')
@@ -153,9 +150,9 @@
                 </div>
         </div>
         <div class="text-center my-4">
-            <a href="{{url('admin/users')}}" ><button type="button" class="btn btn-secondary">Discard</button></a>
-            
-            <button type="submit" class="btn btn-success ms-2">Update</button>
+          <button type="submit" class="btn btn-success col-lg-3 col-md-4 col-sm-4 col-8 mt-3">Update</button><br>
+              <a href="{{url('admin/users')}}" ><button type="button" class="btn btn-secondary col-lg-3 col-md-4 col-sm-4 col-8 mt-3">Discard</button></a>
+          
         </div>
         </form>
           </div>

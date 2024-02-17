@@ -49,7 +49,7 @@ class AdminUsers extends Controller
             'password' =>  $request->password,
         ]);
 
-        return redirect('admin/users/create')->with('status','User added');
+        return redirect('admin/users/create')->with('status','User added successfully');
         
     }
 
@@ -91,7 +91,7 @@ class AdminUsers extends Controller
             'password' =>  $request->password,
         ]);
 
-        return redirect()->back()->with('status','User details updated');
+        return redirect('/admin/users')->with('status','User details successfully updated');
     }
 
     public function destroy(int $id)
@@ -99,6 +99,6 @@ class AdminUsers extends Controller
         $User = User::findOrFail($id);
         $User->delete();
 
-        return redirect()->back()->with('status','User details deleted');
+        return redirect()->back()->with('status','User details successfully deleted');
     }
 }

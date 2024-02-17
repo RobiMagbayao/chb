@@ -30,7 +30,7 @@
             >
             <a class="nav-link" href="{{route('admin.adminBookings')}}">Bookings</a>
             <a class="nav-link" href="{{route('admin.adminMessages')}}">Messages</a>
-            <a class="nav-link" href="{{route('admin.adminContactus')}}">Contact Us</a>
+            <a class="nav-link" href="{{route('admin.adminContactus')}}">Enquiries</a>
             <a class="nav-link" href="{{route('admin.adminUsers')}}">Users</a>
             <a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('formLogout').submit();" class="nav-link">Logout</a>
             <form action="{{route('logout')}}" method="POST" id="formLogout">@csrf</form>
@@ -62,23 +62,6 @@
                       <span class="text-danger">{{$message}}</span>
                   @enderror
               </div>  
-
-              <!-- Quote -->
-              <div class="col-md-6 col-12 my-3 mx-auto">
-                <label class="form-label fw-bold" for="quote">Quote</label>
-                <textarea class="form-control" name="quote" id="quote" rows="2">{{ $quote->quote }}</textarea>
-              </div>
-
-              <!-- Status -->
-              <div class="col-md-6 col-12 my-3 mx-auto">
-                <label class="form-label fw-bold" for="status">Status</label>
-                <select class="form-select service-border" aria-label="Select status" name="status" id="status">
-                    <option value="Pending" {{ $quote->status == 'Pending' ? 'selected' : '' }}>Pending</option>
-                    <option value="With quote" {{ $quote->status == 'With quote' ? 'selected' : '' }}>With quote</option>
-                    <option value="Cancelled" {{ $quote->status == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>  
-                </select>
-              </div>
-
 
                 <!--service-->
                 <div class="col-md-6 col-12 my-3 mx-auto">
@@ -247,10 +230,31 @@
                 value="{{$quote->window_qty}}"
               />
             </div>
+
+            <!-- Status -->
+            <div class="col-md-6 col-12 my-3 mx-auto">
+              <label class="form-label fw-bold" for="status">Status</label>
+              <select class="form-select service-border" aria-label="Select status" name="status" id="status">
+                  <option value="Pending" {{ $quote->status == 'Pending' ? 'selected' : '' }}>Pending</option>
+                  <option value="With quote" {{ $quote->status == 'With quote' ? 'selected' : '' }}>With quote</option>
+                  <option value="Booked" {{ $quote->status == 'Booked' ? 'selected' : '' }}>Booked</option>
+                  <option value="Completed (paid)" {{ $quote->status == 'Completed (paid)' ? 'selected' : '' }}>Completed (paid)</option>
+                  <option value="Completed (unpaid)" {{ $quote->status == 'Completed (unpaid)' ? 'selected' : '' }}>Completed (unpaid)</option>
+                  <option value="Cancelled" {{ $quote->status == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>  
+              </select>
+            </div>
+
+            <!-- Quote -->
+            <div class="col-md-6 col-12 my-3">
+              <label class="form-label fw-bold" for="quote">Quote</label>
+              <textarea class="form-control" maxlength="255" name="quote" id="quote" rows="2">{{ $quote->quote }}</textarea>
+            </div>
+
+            
               
         <div class="text-center my-4">
-            <button type="submit" class="btn btn-success mb-2 px-5">Update</button><br>
-            <a href="{{url('admin/quotes')}}" ><button type="button" class="btn btn-secondary mb-2 px-5">Discard</button></a><br>
+            <button type="submit" class="btn btn-success col-lg-3 col-md-4 col-sm-4 col-8 mt-3">Update</button><br>
+            <a href="{{url('admin/quotes')}}" ><button type="button" class="btn btn-secondary col-lg-3 col-md-4 col-sm-4 col-8 mt-3">Discard</button></a>
         </div>
         </form>
           </div>

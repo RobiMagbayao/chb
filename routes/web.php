@@ -1,13 +1,12 @@
 <?php
 
 use App\Http\Controllers\AboutusController;
-use App\Http\Controllers\AdminBookings;
 use App\Http\Controllers\AdminContactus;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminMessages;
-use App\Http\Controllers\AdminQuotes;
 use App\Http\Controllers\AdminUsers;
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactusController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\GuttercleaningController;
@@ -16,7 +15,6 @@ use App\Http\Controllers\PrivatepolicyController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\TermsandconditionController;
-use App\Http\Controllers\UserBookings;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserMessages;
 use Illuminate\Support\Facades\Route;
@@ -44,9 +42,6 @@ Route::get('/guttercleaning',[GuttercleaningController::class, 'index'])->name('
 
 Auth::routes();
 
-Route::middleware('auth')->group(function(){
-    Route::get('/my-bookings',[UserBookings::class,'index'])->name('user.userBookings');
-});
 
 
 
@@ -59,10 +54,7 @@ Route::middleware(['auth','auth.admin'])->group(function()
     Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
 });
 
-Route::middleware(['auth','auth.admin'])->group(function()
-{
-    Route::get('/admin/bookings',[AdminBookings::class,'index'])->name('admin.adminBookings');
-});
+
 
 
 
@@ -141,6 +133,7 @@ Route::middleware(['auth','auth.admin'])->group(function()
 Route::middleware('auth')->group(function(){
     Route::get('/my-quotes',[QuoteController::class,'index'])->name('user.userQuotes');
 });
+
 Route::middleware('auth')->group(function(){
     Route::get('/my-quotes/{id}/delete',[QuoteController::class,'destroy']);
 });
@@ -242,4 +235,42 @@ Route::middleware(['auth','auth.admin'])->group(function()
 Route::middleware(['auth','auth.admin'])->group(function()
 {
     Route::put('/admin/quotes/{id}/edit', [QuoteController::class, 'adminupdate']);
+});
+
+//BOOKING
+Route::middleware('auth')->group(function(){
+    Route::get('/my-bookings',[BookingController::class,'indexUser'])->name('user.userBookings');
+});
+Route::middleware('auth')->group(function(){
+    Route::get('/my-bookings/create', [BookingController::class, 'schedule']);
+});
+Route::middleware('auth')->group(function(){
+    Route::post('/my-bookings/create', [BookingController::class, 'store']);
+});
+Route::middleware('auth')->group(function(){
+    Route::get('/my-bookings/edit', [BookingController::class, 'edit']);
+});
+Route::middleware('auth')->group(function(){
+    Route::put('/my-bookings/{id}/edit', [BookingController::class, 'update']);
+});
+Route::middleware('auth')->group(function(){
+    Route::get('/my-bookings/{id}/delete',[BookingController::class,'destroy']);
+});
+
+
+Route::middleware(['auth','auth.admin'])->group(function()
+{
+    Route::get('/admin/bookings',[BookingController::class,'indexAdmin'])->name('admin.adminBookings');
+});
+Route::middleware(['auth','auth.admin'])->group(function()
+{
+    Route::post('/admin/bookings/create', [BookingController::class, 'adminstore']);
+});
+Route::middleware(['auth','auth.admin'])->group(function()
+{
+    Route::put('/admin/bookings/{id}/edit', [BookingController::class, 'adminupdate']);
+});
+Route::middleware(['auth','auth.admin'])->group(function()
+{
+    Route::get('/admin/bookings/{id}/delete',[BookingController::class,'admindestroy']);
 });

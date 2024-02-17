@@ -51,7 +51,6 @@ class QuoteController extends Controller
 
         $request->validate([
             'user_id' => 'string|max:20',
-            'quote_date' => 'nullable',
             'service_type' => 'nullable',
             'property_address' => 'string|max:255',
             'type_of_roof' => 'nullable',
@@ -83,7 +82,6 @@ class QuoteController extends Controller
 
          Quote::create([
             'user_id' => $request->user_id,
-            'quote_date' => $request->quote_date,
             'service_type' => $request->service_type,
             'property_address' => $request->property_address,
             'type_of_roof' => $request->type_of_roof,
@@ -95,14 +93,14 @@ class QuoteController extends Controller
             'with_algae' => $request->with_algae,
             'type_of_area' => $request->type_of_area,
             'area_size' => $request->area_size,
-            'photo' =>  $path.$filename,
-            'quote' => $request->quote ?? 'Pending',
+            'photo' =>  $filename,
+            'quote' => $request->quote,
             'comment' => $request->comment,
-            'status' => $request->status ?? 'Pending',
+            'status' => $request->status,
             'with_personal_info' => $request->with_personal_info ?? 'no',
          ]);   
 
-         return redirect('/my-quotes')->with('status', 'Quote Request Submitted Successfully');
+         return redirect('/my-quotes')->with('status', 'Quote request submitted successfully');
 
     }
 
@@ -142,7 +140,6 @@ class QuoteController extends Controller
     {
         $request->validate([
             'user_id' => 'string|max:20',
-            'quote_date' => 'nullable',
             'service_type' => 'nullable',
             'property_address' => 'string|max:255',
             'type_of_roof' => 'nullable',
@@ -174,7 +171,6 @@ class QuoteController extends Controller
 
          Quote::findOrFail($id)->update([
             'user_id' => $request->user_id,
-            'quote_date' => $request->quote_date,
             'service_type' => $request->service_type,
             'property_address' => $request->property_address,
             'type_of_roof' => $request->type_of_roof,
@@ -186,14 +182,14 @@ class QuoteController extends Controller
             'with_algae' => $request->with_algae,
             'type_of_area' => $request->type_of_area,
             'area_size' => $request->area_size,
-            'photo' =>  $path.$filename,
-            'quote' => $request->quote ?? 'Pending',
+            'photo' =>  $filename,
+            'quote' => $request->quote,
             'comment' => $request->comment,
-            'status' => $request->status ?? 'Pending',
+            'status' => $request->status,
             'with_personal_info' => $request->with_personal_info ?? 'no',
          ]);   
 
-         return redirect('/my-quotes')->with('status', 'Quote Request Updated Successfully');
+         return redirect('/my-quotes')->with('status', 'Quote request updated successfully');
 
     }
 
@@ -213,7 +209,6 @@ class QuoteController extends Controller
     {
         $request->validate([
             'user_id' => 'string|max:20',
-            'quote_date' => 'nullable',
             'service_type' => 'nullable',
             'property_address' => 'string|max:255',
             'type_of_roof' => 'nullable',
@@ -245,7 +240,6 @@ class QuoteController extends Controller
 
          Quote::findOrFail($id)->update([
             'user_id' => $request->user_id,
-            'quote_date' => $request->quote_date,
             'service_type' => $request->service_type,
             'property_address' => $request->property_address,
             'type_of_roof' => $request->type_of_roof,
@@ -257,14 +251,13 @@ class QuoteController extends Controller
             'with_algae' => $request->with_algae,
             'type_of_area' => $request->type_of_area,
             'area_size' => $request->area_size,
-            'photo' =>  $path.$filename,
             'quote' => $request->quote ?? 'Pending',
             'comment' => $request->comment,
             'status' => $request->status ?? 'Pending',
             'with_personal_info' => $request->with_personal_info ?? 'no',
          ]);   
 
-         return redirect('/admin/quotes')->with('status', 'Quote Updated Successfully');
+         return redirect('/admin/quotes')->with('status', 'Quote updated successfully');
 
     }
 
@@ -273,6 +266,6 @@ class QuoteController extends Controller
         $quote = Quote::findOrFail($id);
         $quote->delete();
 
-        return redirect()->back()->with('status', 'Quote Request Deleted Successfully');
+        return redirect()->back()->with('status', 'Quote request deleted successfully');
     }
 }

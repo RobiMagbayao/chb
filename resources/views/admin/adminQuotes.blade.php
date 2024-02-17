@@ -31,7 +31,7 @@
               >
               <a class="nav-link" href="{{route('admin.adminBookings')}}">Bookings</a>
               <a class="nav-link" href="{{route('admin.adminMessages')}}">Messages</a>
-              <a class="nav-link" href="{{route('admin.adminContactus')}}">Contact Us</a>
+              <a class="nav-link" href="{{route('admin.adminContactus')}}">Enquiries</a>
               <a class="nav-link" href="{{route('admin.adminUsers')}}">Users</a>
               <a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('formLogout').submit();" class="nav-link">Logout</a>
               <form action="{{route('logout')}}" method="POST" id="formLogout">@csrf</form>
@@ -66,7 +66,11 @@
                   <td class="p-2">{{$item->created_at->format('M d, Y')}}</td>
                   <td class="p-2">{{ $item->user->firstname }} {{ $item->user->lastname }}</td>
                   <td class="p-2">{{$item->service_type}}</td>
-                  <td class="p-2">{{$item->status}}</td>
+                  @if ($item->quote == 'Pending' || $item->quote == '')
+                      <td><i class="bi bi-circle-fill" style="font-size: 8px; color:navy"></i> {{$item->status}}</td>
+                  @else
+                      <td>{{$item->status}}</td>
+                  @endif
                   <td>
                     <button type="button" class="btn btn-sm btn-primary w-100" data-bs-toggle="modal" data-bs-target="#viewQuoteModal-{{ $item->id }}">
                       View
@@ -77,7 +81,7 @@
               </tbody>
               <!-- Modal for view Quote -->
               <div class="modal fade" id="viewQuoteModal-{{ $item->id }}" tabindex="-1" aria-labelledby="viewQuoteModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="viewQuoteModalLabel">{{ $item->service_type }} Quote Request</h1>
@@ -131,7 +135,7 @@
                             @endif
 
                             @if(!empty($item->photo))
-                                <div class="py-2 px-2"><strong>Uploaded Photo : <br></strong><img src="{{$item->photo}}" alt="uploaded photo" style="max-height: 300px"></div>
+                                <div class="py-2 px-2"><strong>Uploaded Photo : <br></strong><img src="/uploads/quotes/{{$item->photo}}" alt="uploaded photo" style="max-height: 300px"></div>
                             @endif
 
                           <div class="py-1 px-2"><strong>Quote : </strong>{{$item->quote}}</div>
@@ -140,26 +144,69 @@
                           <div class="py-1 px-2"><strong>Name : </strong>{{ $item->user->firstname }} {{ $item->user->lastname }}</div>
                           <div class="py-1 px-2"><strong>Email : </strong>{{ $item->user->email }}</div>
                           <div class="py-1 px-2"><strong>Phone : </strong>{{ $item->user->phone }}</div>
-                
-                        
+                                
                         </div>
-                        <div class="modal-footer d-flex justify-content-center">
-                          <ul class="nav">
-                              <li class="nav-item">
-                                  <a class="nav-link bg-success text-white " href="#">Book</a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link bg-secondary text-white" href="{{url('/admin/quotes/'.$item->id.'/edit')}}">Edit</a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link bg-danger text-white" type="button" data-bs-toggle="modal" data-bs-target="#deleteQuoteModal-{{ $item->id }}">Delete</a>
-                              </li>
-                          </ul>
+                        <div class="modal-footer">
+                          <div class="d-flex w-100 m-0" >
+                            <a class="w-50 btn btn-sm my-1 btn-primary mx-1" data-bs-toggle="modal" data-bs-target="#givequoteModal-{{ $item->id }}">Provide Quote</a>
+                            <a class="w-50 btn btn-sm my-1 btn-success mx-1" href="#">Book</a>
+                          </div>
+                          <div class="d-flex w-100 m-0">
+                            <a class="w-50 btn btn-sm my-1 btn-secondary mx-1" href="{{url('/admin/quotes/'.$item->id.'/edit')}}">Edit</a>
+                            <a class="w-50 btn btn-sm my-1 btn-danger mx-1" type="button" data-bs-toggle="modal" data-bs-target="#deleteQuoteModal-{{ $item->id }}">Delete</a>
+                          </div>
+                          
+                          
                       </div>
                       
                     </div>
                 </div>
               </div>
+              
+              <!-- Modal for edit Give quote-->
+          <div class="modal fade" id="givequoteModal-{{ $item->id }}" tabindex="-1" aria-labelledby="givequoteModalLabel" aria-hidden="true" data-bs-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content pt-4 px-4">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="givequoteModalLabel">Provide Quote</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form class="row" action="{{url('/admin/quotes/'.$item->id.'/edit')}}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="visually-hidden">
+                          <input type="text" name="user_id" value="{{ $item->user->id }}">
+                          <input type="text" name="quote_id" value="{{ $item->id }}">
+                          <input type="text" name="service_type" value="{{ $item->service_type }}">
+                          <input type="text" name="property_address" value="{{ $item->property_address }}">
+                        </div>
+                        <!-- Quote -->
+                    <div class="mb-3">
+                      <label class="form-label fw-bold" for="quote">Quote</label>
+                      <textarea class="form-control" maxlength="255" name="quote" id="quote" rows="2">{{ $item->quote }} </textarea>
+                    </div>
+                    <!-- Status -->
+                    <div>
+                      <label class="form-label fw-bold" for="status">Status</label>
+                      <select class="form-select service-border" aria-label="Select status" name="status" id="status">
+                          <option value="Pending" {{ $item->status == 'Pending' ? 'selected' : '' }}>Pending</option>
+                          <option value="With quote" {{ $item->status == 'With quote' ? 'selected' : '' }}>With quote</option>
+                          <option value="Booked" {{ $item->status == 'Booked' ? 'selected' : '' }}>Booked</option>
+                          <option value="Completed (paid)" {{ $item->status == 'Completed (paid)' ? 'selected' : '' }}>Completed (paid)</option>
+                          <option value="Completed (unpaid)" {{ $item->status == 'Completed (unpaid)' ? 'selected' : '' }}>Completed (unpaid)</option>
+                          <option value="Cancelled" {{ $item->status == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>  
+                      </select>
+                    </div>
+                    </div>
+                <div class="text-center my-4">
+                  <button type="submit" class="btn btn-success btn-sm w-100">Confirm</button><br>
+                  <a href="{{url('/admin/quotes')}}" ><button type="button" class="btn btn-secondary btn-sm w-100 mt-2">Discard</button></a>
+                </div>
+                </form>
+                    </div>
+                </div>
+            </div>
 
                <!-- Modal for Delete Quote -->
                 <div class="modal fade" id="deleteQuoteModal-{{ $item->id }}" tabindex="-1" aria-labelledby="deleteQuoteModalLabel" aria-hidden="true">
@@ -173,8 +220,8 @@
                               Are you sure you want to delete this quote request?
                           </div>
                           <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard</button>
-                              <a href="{{ url('/my-quotes/'.$item->id.'/delete') }}" class="btn btn-danger">Delete</a>
+                            <a href="{{ url('/my-quotes/'.$item->id.'/delete') }}" class="btn btn-danger btn-sm w-100">Delete</a>
+                              <button type="button" class="btn btn-secondary btn-sm w-100" data-bs-dismiss="modal">Discard</button>    
                           </div>
                       </div>
                   </div>
@@ -186,5 +233,9 @@
       </div>
     </section>
     <!--end of quotes dashbord-->
+
+  
+
+  
 
     @endsection

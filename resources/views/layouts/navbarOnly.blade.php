@@ -45,9 +45,9 @@
         <div class="row">
           <div class="col-12">
             <nav class="navbar nav-bar navbar-expand-lg pe-2">
-              <a class="navbar-brand ps-lg-3 ps-1 py-2" href="./">
+              <a class="navbar-brand ps-lg-3 ps-1 py-2" href="{{route('app.index')}}">
                 <img
-                  src="assets/images/logo1.png"
+                  src="/assets/images/logo1.png"
                   height="50"
                   class="d-inline-block align-top"
                   alt="logo"
@@ -68,7 +68,7 @@
                   class="navbar-nav d-flex align-items-center ms-auto mb-2 mb-lg-0 pe-lg-4 pe-0"
                 >
                   <li class="nav-item">
-                    <a class="nav-link" href="./">Home</a>
+                    <a class="nav-link" href="{{route('app.index')}}">Home</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a
@@ -84,47 +84,47 @@
                       <li>
                         <a
                           class="dropdown-item"
-                          href="services-gutter-cleaning.html"
+                          href="{{url('gutter_cleaning')}}"
                           >Gutter Cleaning</a
                         >
                       </li>
                       <li>
                         <a
                           class="dropdown-item"
-                          href="services-gutter-install.html"
+                          href="{{url('gutter_guard_installation')}}"
                           >Gutter Guard Installation</a
                         >
                       </li>
                       <li>
-                        <a class="dropdown-item" href="services-solar.html"
+                        <a class="dropdown-item" href="{{ url('solar_cleaning') }}"
                           >Solar Panel Cleaning</a
                         >
                       </li>
                       <li>
-                        <a class="dropdown-item" href="services-roof.html"
-                          >Roof Wash</a
+                        <a class="dropdown-item" href="{{ url('roof_cleaning') }}"
+                          >Roof Cleaning</a
                         >
                       </li>
                       <li>
-                        <a class="dropdown-item" href="services-window.html"
+                        <a class="dropdown-item" href="{{ url('window_cleaning') }}"
                           >Window Cleaning</a
                         >
                       </li>
                       <li>
-                        <a class="dropdown-item" href="services-powerwash.html"
+                        <a class="dropdown-item" href="{{ url('power_wash') }}"
                           >Power Wash</a
                         >
                       </li>
                     </ul>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="location.html">Locations</a>
+                    <a class="nav-link" href="{{route('location.index')}}">Locations</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="contactus.html">Contact Us</a>
+                    <a class="nav-link" href="{{route('contactus.index')}}">Contact Us</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="aboutus.html">About Us</a>
+                    <a class="nav-link"  href="{{route('aboutus.index')}}">About Us</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a

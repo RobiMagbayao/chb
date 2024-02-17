@@ -52,7 +52,7 @@ class UserController extends Controller
             'password' =>  $request->password,
         ]);
     
-        return redirect()->back()->with('status','User profile updated');
+        return redirect('/my-account')->with('status','User profile updated successfully');
     }
 
 
@@ -61,6 +61,6 @@ class UserController extends Controller
         $user = Auth::user();
         $user->delete();
 
-        return redirect()->back()->with('status','User profile deleted');
+        return redirect()->back()->with('status','User profile deleted successfully');
     }
 }

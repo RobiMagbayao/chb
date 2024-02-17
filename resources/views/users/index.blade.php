@@ -11,6 +11,11 @@
           >
             USER PROFILE
           </div>
+          @if (session('status'))
+            <div class="alert alert-success text-center fw-bold">
+                {{session('status')}}
+            </div>
+          @endif
           <form class="row">
             <div class="col-md-6 col-12 px-4 pb-3">
               <div class="mb-3">
@@ -65,7 +70,7 @@
               </div>
             </div>
             <center>
-              <a href="{{ url('/my-account/edit') }}" class="btn btn-secondary col-lg-3 col-md-4 col-sm-4 col-8 mt-3">
+              <a href="{{ url('/my-account/edit') }}" class="btn btn-success col-lg-3 col-md-4 col-sm-4 col-8 mt-3">
                   Edit Profile
               </a>
           </center>

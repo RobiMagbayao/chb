@@ -2,15 +2,17 @@
 @section('content')
 
  <!--services section-->
- <section class="container nav-margin">
+  <section class="container nav-margin">
     <div class="row">
-      <div class="section-header display-4 col-12 text-center pb-5">
-        OUR SERVICES
+      <div
+        class="section-header display-4 col-12 text-center my-5 pt-md-5 pt-4"
+      >
+        SERVICES
       </div>
 
       <div class="col-lg-4 col-md-6 col-sm-6 col-12 px-4 mb-sm-5 mb-4">
         <div class="card service-card h-100" style="width: 100%">
-          <a href="#">
+          <a href="{{url('gutter_cleaning')}}">
             <div class="card-body p-4">
               <h5 class="card-title h4 mb-3 service-card-header">
                 Gutter Cleaning
@@ -27,7 +29,7 @@
 
       <div class="col-lg-4 col-md-6 col-sm-6 col-12 px-4 mb-sm-5 mb-4">
         <div class="card service-card h-100" style="width: 100%">
-          <a href="#">
+          <a href="{{url('gutter_guard_installation')}}">
             <div class="card-body p-4">
               <h5 class="card-title h4 mb-3 service-card-header">
                 Gutter Guard Installation
@@ -44,7 +46,7 @@
 
       <div class="col-lg-4 col-md-6 col-sm-6 col-12 px-4 mb-sm-5 mb-4">
         <div class="card service-card h-100" style="width: 100%">
-          <a href="#">
+          <a href="{{ url('solar_cleaning') }}">
             <div class="card-body p-4">
               <h5 class="card-title h4 mb-3 service-card-header">
                 Solar Panel Cleaning
@@ -61,7 +63,7 @@
 
       <div class="col-lg-4 col-md-6 col-sm-6 col-12 px-4 mb-sm-5 mb-4">
         <div class="card service-card h-100" style="width: 100%">
-          <a href="#">
+          <a href="{{ url('window_cleaning') }}">
             <div class="card-body p-4">
               <h5 class="card-title h4 mb-3 service-card-header">
                 Window Cleaning
@@ -78,10 +80,10 @@
 
       <div class="col-lg-4 col-md-6 col-sm-6 col-12 px-4 mb-sm-5 mb-4">
         <div class="card service-card h-100" style="width: 100%">
-          <a href="#">
+          <a href="{{ url('roof_cleaning') }}">
             <div class="card-body p-4">
               <h5 class="card-title h4 mb-3 service-card-header">
-                Roof Wash
+                Roof Cleaning
               </h5>
               <p class="card-text service-card-text">
                 Give your roof a fresh look! Our roof wash removes moss,
@@ -95,7 +97,7 @@
 
       <div class="col-lg-4 col-md-6 col-sm-6 col-12 px-4 mb-sm-5 mb-4">
         <div class="card service-card h-100" style="width: 100%">
-          <a href="#">
+          <a href="{{ url('power_wash') }}">
             <div class="card-body p-4">
               <h5 class="card-title h4 mb-3 service-card-header">
                 Power Wash
