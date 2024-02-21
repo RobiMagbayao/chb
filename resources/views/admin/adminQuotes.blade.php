@@ -148,7 +148,7 @@
                         <div class="modal-footer">
                           <div class="d-flex w-100 m-0" >
                             <a class="w-50 btn btn-sm my-1 btn-primary mx-1" data-bs-toggle="modal" data-bs-target="#givequoteModal-{{ $item->id }}">Provide Quote</a>
-                            <a href="{{ url('/admin/bookings/') }}" class="w-50 btn btn-sm my-1 btn-success" data-bs-toggle="modal" data-bs-target="#BookModal-{{ $item->id }}" >Book</a>
+                            <a href="{{ url('/admin/bookings/') }}" class="w-50 btn btn-sm my-1 mx-1 btn-success" data-bs-toggle="modal" data-bs-target="#BookModal-{{ $item->id }}" >Book</a>
                           </div>
                           <div class="d-flex w-100 m-0">
                             <a class="w-50 btn btn-sm my-1 btn-secondary mx-1" href="{{url('/admin/quotes/'.$item->id.'/edit')}}">Edit</a>

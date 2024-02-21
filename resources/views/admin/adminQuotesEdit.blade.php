@@ -77,23 +77,49 @@
                       disabled
                     />
                 </div>
-                  <!--address-->
-                  <div class="col-md-6 col-12 my-3 mx-auto">
-                    <label class="form-label fw-bold" for="property_address"
-                      >Property address</label
-                    >
-                    <input
-                      class="form-control"
-                      type="text"
-                      id="property_address"
-                      name="property_address"
-                      required
-                      pattern=".{10,}"
-                      title="Please enter at least 10 characters"
-                      placeholder="Enter property address"
-                      value="{{$quote->property_address}}"
-                    />
-                </div>
+                  <!--GOOGLE MAP API-->
+            <div class="col-md-6 col-12 my-3 mx-auto">
+              <label class="form-label fw-bold" for="property_address"
+                >Enter property address</label
+              >
+              <input
+                class="form-control map-input"
+                type="text"
+                id="property_address"
+                name="property_address"
+                required
+                pattern=".{10,}"
+                title="Please enter at least 10 characters"
+                placeholder="Enter property address"
+                value="{{$quote->property_address}}"
+              />
+            </div>
+            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto  visually-hidden">
+              <label class="form-label fw-bold" for="address-latitude"
+                >Latitude</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                id="address-latitude"
+              />
+            </div>
+            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto visually-hidden">
+              <label class="form-label fw-bold" for="address-longitude"
+                >Longitude</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                id="address-longitude"
+              />
+            </div>
+            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto  visually-hidden">
+              <div id="address-map-container" style="width: 100%;height:250px;">
+                <div style="width:100%;height:100%" id="address-map"></div>
+              </div>
+            </div>
+            <!--GOOGLE MAP API-->
 
                 <!--Roof Type-->
                 <div class="col-md-6 col-12 my-3 mx-auto">

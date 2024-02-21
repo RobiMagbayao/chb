@@ -36,7 +36,8 @@
         <div
           class="col-lg-6 col-md-6 col-12 mx-auto pt-md-0 pt-4 px-md-0 px-sm-5 px-4"
         >
-        <form action="{{ url('gutter_cleaning') }}" method="POST" enctype="multipart/form-data">
+        <form id="quoteForm" action="{{ url('gutter_cleaning') }}" method="POST" enctype="multipart/form-data">
+
             @csrf
 
             <div class="visually-hidden">
@@ -114,12 +115,13 @@
                 </option>
               </select>
             </div>
+            <!--GOOGLE MAP API-->
             <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto">
               <label class="form-label fw-bold" for="property_address"
                 >Enter property address</label
               >
               <input
-                class="form-control"
+                class="form-control map-input"
                 type="text"
                 id="property_address"
                 name="property_address"
@@ -130,6 +132,32 @@
                 value="@auth {{ Auth::user()->address }} @endauth"
               />
             </div>
+            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto  visually-hidden">
+              <label class="form-label fw-bold" for="address-latitude"
+                >Latitude</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                id="address-latitude"
+              />
+            </div>
+            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto visually-hidden">
+              <label class="form-label fw-bold" for="address-longitude"
+                >Longitude</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                id="address-longitude"
+              />
+            </div>
+            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto  visually-hidden">
+              <div id="address-map-container" style="width: 100%;height:250px;">
+                <div style="width:100%;height:100%" id="address-map"></div>
+              </div>
+            </div>
+            <!--GOOGLE MAP API-->
             <div class="col-md-10 col-sm-11 col-12 mx-auto my-4">
               <label for="comment" class="form-label fw-bold"
                 >Message (Optional)</label
@@ -167,5 +195,6 @@
         }
     });
 </script>
+
 
 @endsection
