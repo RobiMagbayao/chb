@@ -15,7 +15,7 @@
               class="d-inline-block align-top img-fluid"
               alt="logo"
           /></a>
-            <nav id="adminOptions" class="userlink nav nav-pills flex-column pt-3">
+            <nav id="adminOptions" class="userlink nav nav-pills flex-column">
               <a
                 id="adminHome"
                 class="nav-link"
@@ -25,7 +25,6 @@
               >
               <a class="nav-link" href="{{route('admin.adminQuotes')}}">Quotes</a>
               <a class="nav-link" href="{{route('admin.adminBookings')}}">Bookings</a>
-              <a class="nav-link" href="{{route('admin.adminMessages')}}">Messages</a>
               <a class="nav-link" href="{{route('admin.adminContactus')}}">Enquiries</a>
               <a
                 class="nav-link active ActiveOption text-white"

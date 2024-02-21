@@ -34,7 +34,6 @@
                                 href="{{route('admin.adminBookings')}}"
                                 >Bookings</a
                             >
-                            <a class="nav-link" href="{{route('admin.adminMessages')}}">Messages</a>
                             <a class="nav-link" href="{{route('admin.adminContactus')}}">Enquiries</a>
                             <a class="nav-link" href="{{route('admin.adminUsers')}}">Users</a>
                             <a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('formLogout').submit();" class="nav-link">Logout</a>
@@ -60,7 +59,7 @@
                               <th class="col-2 p-2">Date</th>
                               <th class="col-1 p-2">Time</th>
                               <th class="col-3 p-2">Name</th>
-                              <th class="col-3 p-2">Service</th>
+                              <th class="col-2 p-2">Service</th>
                               <th class="col-2 p-2">Status</th>
                               <th class="col-1 text-center">Action</th>
                             </tr>
@@ -86,7 +85,7 @@
                           </tbody>
                           <!-- Modal for view Book -->
                           <div class="modal fade" id="viewBookModal-{{ $item->id }}" tabindex="-1" aria-labelledby="viewBookModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog  modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title fs-5" id="viewBookModalLabel">{{ $item->quote->service_type }} Book Details</h1>
@@ -148,8 +147,11 @@
                                     
                                     </div>
                                     <div class="modal-footer">
-                                      <a href="{{ url('/admin/bookings') }}" class="w-100 btn btn-sm my-1 btn-success" data-bs-toggle="modal" data-bs-target="#BookModal-{{ $item->id }}" >Change Schedule</a>
-                                      <div class="w-100 btn btn-sm my-1  btn-secondary" data-bs-toggle="modal" data-bs-target="#editQuoteModal-{{ $item->id }}">Edit Details</div> 
+                                      <div class="d-flex w-100 m-0">
+                                        <a href="{{ url('/admin/bookings') }}" class="w-50 mx-1 btn btn-sm my-1 btn-success" data-bs-toggle="modal" data-bs-target="#BookModal-{{ $item->id }}" >Change Schedule</a>
+                                        <div class="w-50 btn mx-1 btn-sm my-1  btn-secondary" data-bs-toggle="modal" data-bs-target="#editQuoteModal-{{ $item->id }}">Edit Details</div> 
+                                      </div>
+                                      
                                       <button type="button" class="btn btn-sm btn-danger w-100" data-bs-toggle="modal" data-bs-target="#deleteBookModal-{{ $item->id }}">
                                         Delete
                                       </button>

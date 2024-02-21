@@ -14,6 +14,7 @@ class ContactMessage extends Model
         'lastname',
         'email',
         'phone',
+        'status',
         'message',
     ];
 

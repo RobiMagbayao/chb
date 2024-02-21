@@ -104,13 +104,17 @@
                         
                         </div>
                         <div class="modal-footer">
-                          @if ($item->quote == 'Pending')
+                          @if ($item->quote == 'Pending' && $item->status !== 'Booked')
                           <button type="button" class="w-100 btn btn-sm my-1 btn-success" data-bs-toggle="modal" data-bs-target="#noQuoteModal">
                             Book
                           </button>
-                        @else
-                        <a href="{{ url('/my-bookings') }}" class="w-100 btn btn-sm my-1 btn-success" data-bs-toggle="modal" data-bs-target="#BookModal-{{ $item->id }}" >Book</a>
-                        @endif
+                          @elseif($item->status == 'Booked' || $item->status == 'Completed (unpaid)' || $item->status == 'Completed (paid)' || $item->status == 'Cancelled')
+                          <button type="button" class="w-100 btn btn-sm my-1 btn-success" data-bs-toggle="modal" data-bs-target="#alreadyBookedModal">
+                            Book
+                          </button>
+                          @else
+                            <a href="{{ url('/my-bookings') }}" class="w-100 btn btn-sm my-1 btn-success" data-bs-toggle="modal" data-bs-target="#BookModal-{{ $item->id }}" >Book</a>
+                          @endif
                               
                               <div class="w-100 btn btn-sm my-1  btn-secondary" data-bs-toggle="modal" data-bs-target="#editQuoteModal-{{ $item->id }}">Edit Details</div>
                           <button type="button" class="btn btn-sm btn-danger w-100" data-bs-toggle="modal" data-bs-target="#deleteQuoteModal-{{ $item->id }}">
@@ -195,11 +199,13 @@
                         @elseif ($item->status == 'With quote' && $item->quote !== 'Pending')
                             Editing service details will void your previous quote. Are you sure you want to edit service details?
                         @elseif ($item->status == 'Booked' && $item->quote == 'Pending')
-                            Are you sure you want to edit service details?
+                            You already booked this service. Are you sure you want to edit service details?
                         @elseif ($item->status == 'Booked' && $item->quote !== 'Pending')
-                            <strong>Important:</strong> You already booked this service. Editing service details will void your previous quote. If you want to view the new quote before proceeding with the booking schedule, please delete the booking schedule on the Booking page. Otherwise, we will generate a new quote and proceed with the booking. 
+                            <strong>Important:</strong> You already booked this service. Editing service details will void your previous quote. If you want to view the new quote before proceeding with the booking schedule, please delete the booking request on the Bookings page. Otherwise, we will generate a new quote and proceed with the booking. 
                         @elseif ($item->status == 'Pending' && $item->quote !== 'Pending')
                             Editing service details will void your previous quote. Are you sure you want to edit service details?
+                        @elseif ($item->status == 'Completed (paid)' || $item->quote !== 'Completed (unpaid)' || $item->quote !== 'Cancelled')
+                          You cannot edit the service details at this time.
                         @else
                             You cannot edit the service details at this time.
                         @endif
@@ -247,6 +253,24 @@
             </div>
             <div class="modal-footer">
               <a href="{{ url('/my-bookings') }}" class="w-100 btn btn-sm my-1 btn-success" data-bs-toggle="modal" data-bs-target="#BookModal-{{ $item->id }}" >Proceed to book</a>
+              <button type="button" class="w-100 btn btn-sm my-1 btn-secondary" data-bs-dismiss="modal">Discard</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- already booked Modal -->
+      <div class="modal fade" id="alreadyBookedModal" tabindex="-1" aria-labelledby="alreadyBookedModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="alreadyBookedModalLabel">Book {{$item->service_type}}</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                You already booked this service.
+            </div>
+            <div class="modal-footer">
               <button type="button" class="w-100 btn btn-sm my-1 btn-secondary" data-bs-dismiss="modal">Discard</button>
             </div>
           </div>

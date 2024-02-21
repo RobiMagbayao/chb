@@ -11,7 +11,7 @@ class QuoteController extends Controller
     public function index()
     {
         $user_id = Auth::id();
-        $quote = Quote::where('user_id', $user_id)->get();
+        $quote = Quote::where('user_id', $user_id)->orderBy('created_at', 'desc')->get();
         return view('users.userQoutes', compact('quote'));
     }
 
@@ -196,7 +196,7 @@ class QuoteController extends Controller
     //ADMIN
     public function adminview()
     {
-        $quote = Quote::get();
+        $quote = Quote::orderBy('updated_at', 'desc')->get();
         return view('admin.adminQuotes', compact('quote'));
     }
 

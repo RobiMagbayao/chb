@@ -73,7 +73,7 @@ Route::get('/contactus',[ContactusController::class, 'index'])->name('contactus.
 Route::post('/contactus', [ContactusController::class, 'store'])->name('contactus.store'); //contact us store data
 Route::middleware(['auth','auth.admin'])->group(function()
 {
-    Route::delete('/admin/contactus/{contactMessage}', [AdminContactus::class, 'destroy'])->name('admin.contactus.destroy'); //contact us delete
+    Route::get('/admin/contactus/{id}', [AdminContactus::class, 'destroy'])->name('admin.contactus.destroy'); //contact us delete
 });
 Route::middleware(['auth','auth.admin'])->group(function()
 {
@@ -81,8 +81,9 @@ Route::middleware(['auth','auth.admin'])->group(function()
 });
 Route::middleware(['auth','auth.admin'])->group(function()
 {
-    Route::patch('/admin/contactus/{contactMessage}', [AdminContactus::class, 'updateStatus'])->name('admin.contactus.updateStatus'); //update status
+    Route::put('/admin/contactus/{id}', [AdminContactus::class, 'updateStatus'])->name('admin.contactus.updateStatus'); //update status
 });
+
 
 //USER PROFILE
 Route::middleware('auth')->group(function(){
@@ -264,7 +265,7 @@ Route::middleware(['auth','auth.admin'])->group(function()
 });
 Route::middleware(['auth','auth.admin'])->group(function()
 {
-    Route::post('/admin/bookings/create', [BookingController::class, 'adminstore']);
+    Route::post('/admin/bookings', [BookingController::class, 'adminstore']);
 });
 Route::middleware(['auth','auth.admin'])->group(function()
 {
@@ -274,3 +275,4 @@ Route::middleware(['auth','auth.admin'])->group(function()
 {
     Route::get('/admin/bookings/{id}/delete',[BookingController::class,'admindestroy']);
 });
+

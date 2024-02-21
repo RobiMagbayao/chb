@@ -169,13 +169,6 @@
                               >Bookings</a
                             >
                           </li>
-                          <li>
-                            <a
-                              class="dropdown-item"
-                              href="{{route('user.userMessages')}}"
-                              >Messages</a
-                            >
-                          </li>
                           @endif
                           <li>
                             <a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('formLogout').submit();" class="dropdown-item">Logout</a>

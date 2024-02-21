@@ -103,7 +103,9 @@
                         </div>
                         <div class="modal-footer">
                           <a href="{{ url('/my-bookings') }}" class="w-100 btn btn-sm my-1 btn-success" data-bs-toggle="modal" data-bs-target="#BookModal-{{ $item->id }}" >Change Schedule</a>
-                          <div class="w-100 btn btn-sm my-1  btn-secondary" data-bs-toggle="modal" data-bs-target="#editQuoteModal-{{ $item->id }}">Edit Details</div> 
+                          <button type="button" class="btn btn-sm btn-secondary w-100" data-bs-toggle="modal" data-bs-target="#editBookModal-{{ $item->id }}">
+                            Edit Details
+                          </button>
                           <button type="button" class="btn btn-sm btn-danger w-100" data-bs-toggle="modal" data-bs-target="#deleteBookModal-{{ $item->id }}">
                             Delete
                           </button>
@@ -111,6 +113,58 @@
                     </div>
                 </div>
               </div>
+
+              <!-- Modal for edit Book -->
+              <div class="modal fade" id="editBookModal-{{ $item->id }}" tabindex="-1" aria-labelledby="editBookModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="editBookModalLabel">Edit Booking Details</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          @if ($item->quote->status == 'Pending' && $item->quote->quote == 'Pending')
+                          Are you sure you want to edit service details?
+                          @elseif ($item->quote->status == 'With quote' && $item->quote->quote !== 'Pending')
+                              Editing service details will void your previous quote. Are you sure you want to edit service details?
+                          @elseif ($item->quote->status == 'Booked' && $item->quote->quote == 'Pending')
+                              You already booked this service. Are you sure you want to edit service details?
+                          @elseif ($item->quote->status == 'Booked' && $item->quote->quote !== 'Pending')
+                              <strong>Important:</strong> You already booked this service. Editing service details will void your previous quote. If you want to view the new quote before proceeding with the booking schedule, please delete the booking request on the Bookings page. Otherwise, we will generate a new quote and proceed with the booking. 
+                          @elseif ($item->quote->status == 'Pending' && $item->quote->quote !== 'Pending')
+                              Editing service details will void your previous quote. Are you sure you want to edit service details?
+                          @elseif ($item->quote->status == 'Completed (paid)' || $item->quote->quote !== 'Completed (unpaid)' || $item->quote !== 'Cancelled')
+                            You cannot edit the service details at this time.
+                          @else
+                              You cannot edit the service details at this time.
+                          @endif
+                        </div>
+                        <div class="modal-footer">
+                          @if ($item->quote->status == 'Pending' || $item->quote->status == 'With quote' || $item->quote->status == 'Booked')
+                          <a href="
+                          @if($item->quote->service_type == 'Gutter Cleaning')
+                              {{ url('gutter_cleaning/'.$item->quote->id.'/edit') }}
+                          @elseif($item->quote->service_type == 'Gutter Guard Installation')
+                              {{ url('gutter_guard_installation/'.$item->quote->id.'/edit') }}
+                          @elseif($item->quote->service_type == 'Power Wash')
+                              {{ url('power_wash/'.$item->quote->id.'/edit') }}
+                          @elseif($item->quote->service_type == 'Roof Cleaning')
+                              {{ url('roof_cleaning/'.$item->quote->id.'/edit') }}
+                          @elseif($item->quote->service_type == 'Solar Panel Cleaning')
+                              {{ url('solar_cleaning/'.$item->quote->id.'/edit') }}
+                          @elseif($item->quote->service_type == 'Window Cleaning')
+                              {{ url('window_cleaning/'.$item->quote->id.'/edit') }}
+                          @endif
+                      " class="w-100 btn btn-sm my-1 btn-success">Edit Details</a>
+                          @endif
+                      @if ($item->quote->status == 'Booked' && $item->quote->quote !== 'Pending')
+                          <a href="{{url('/my-bookings/'.$item->id.'/delete')}}" class="w-100 btn btn-sm my-1 btn-danger">Delete Booking</a>
+                      @endif
+                            <button type="button" class="w-100 btn btn-sm my-1 btn-secondary" data-bs-dismiss="modal">Discard</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
                <!-- Modal for Delete Book -->
                 <div class="modal fade" id="deleteBookModal-{{ $item->id }}" tabindex="-1" aria-labelledby="deleteBookModalLabel" aria-hidden="true">
@@ -140,6 +194,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+                          @if ($item->quote->status == 'Booked' || $item->quote->status == 'Pending' || $item->quote->status == 'With quote')
                           <form class="row" action="{{url('/my-bookings/'.$item->id.'/edit')}}" method="POST">
                             @csrf
                             @method('PUT')
@@ -162,68 +217,24 @@
                                 <option value="3 PM">3 PM</option>
                             </select>
                           </div>
-                    </div>
-                    <div class="text-center my-4">
-                      <button type="submit" class="btn btn-success btn-sm w-100">Confirm</button><br>
-                      <a href="{{url('/my-bookings')}}" ><button type="button" class="btn btn-secondary btn-sm w-100 mt-2">Discard</button></a>
-                    </div>
-                    </form>
+                        </div>
+                        <div class="text-center my-4">
+                          <button type="submit" class="btn btn-success btn-sm w-100">Confirm</button><br>
+                          <a href="{{url('/my-bookings')}}" ><button type="button" class="btn btn-secondary btn-sm w-100 mt-2">Discard</button></a>
+                        </div>
+                        </form>
+                          @else
+                              You cannot change the booking schedule at this time.
+                              <a href="{{url('/my-bookings')}}" ><button type="button" class="btn btn-secondary btn-sm w-100 mt-4">Discard</button></a>
+                          @endif
+                          
                         </div>
                     </div>
                 </div>
 
-                 <!-- Modal for Edit Quote -->
-            <div class="modal fade" id="editQuoteModal-{{ $item->id }}" tabindex="-1" aria-labelledby="editQuoteModalLabel-{{ $item->id }}" aria-hidden="true">
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h5 class="modal-title" id="editQuoteModalLabel-{{ $item->id }}">Edit {{ $item->quote->service_type }} Booking Details</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        @if ($item->quote->status == 'Pending' && $item->quote->quote == 'Pending')
-                          Are you sure you want to edit service details?
-                        @elseif ($item->quote->status == 'With quote' && $item->quote->quote !== 'Pending')
-                            Editing service details will void your previous quote. Are you sure you want to edit service details?
-                        @elseif ($item->quote->status == 'Booked' && $item->quote->quote == 'Pending')
-                            Are you sure you want to edit service details?
-                        @elseif ($item->quote->status == 'Booked' && $item->quote->quote !== 'Pending')
-                            <strong>Important:</strong> You already booked this service. Editing service details will void your previous quote. If you want to view the new quote before proceeding with the booking schedule, please delete this booking schedule. Otherwise, we will generate a new quote and proceed with the booking. 
-                        @elseif ($item->quote->status == 'Pending' && $item->quote->quote !== 'Pending')
-                            Editing service details will void your previous quote. Are you sure you want to edit service details?
-                        @else
-                            You cannot edit the service details at this time.
-                        @endif
-                    
-                      </div>
-                      <div class="modal-footer">
-                        @if ($item->quote->status == 'Pending' || $item->quote->status == 'With quote' || $item->quote->status == 'Booked')
-                        <a href="
-                              @if($item->quote->service_type == 'Gutter Cleaning')
-                                  {{ url('gutter_cleaning/'.$item->quote->id.'/edit') }}
-                              @elseif($item->quote->service_type == 'Gutter Guard Installation')
-                                  {{ url('gutter_guard_installation/'.$item->quote->id.'/edit') }}
-                              @elseif($item->quote->service_type == 'Power Wash')
-                                  {{ url('power_wash/'.$item->quote->id.'/edit') }}
-                              @elseif($item->quote->service_type == 'Roof Cleaning')
-                                  {{ url('roof_cleaning/'.$item->quote->id.'/edit') }}
-                              @elseif($item->quote->service_type == 'Solar Panel Cleaning')
-                                  {{ url('solar_cleaning/'.$item->quote->id.'/edit') }}
-                              @elseif($item->quote->service_type == 'Window Cleaning')
-                                  {{ url('window_cleaning/'.$item->quote->id.'/edit') }}
-                              @endif
-                          " class="w-100 btn btn-sm my-1 btn-success">Edit Details</a>
-                        @endif
-                        @if ($item->quote->status == 'Booked' && $item->quote->quote !== 'Pending')
-                        <button type="button" class="btn btn-sm btn-danger w-100" data-bs-toggle="modal" data-bs-target="#deleteBookModal-{{ $item->id }}">
-                          Delete this booking service
-                        </button>
-                        @endif
-                          <button type="button" class="w-100 btn btn-sm my-1 btn-secondary" data-bs-dismiss="modal">Discard</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
+                <!-- Modal for Edit Quote -->
+            
+                 
               @endforeach
             </table>
      

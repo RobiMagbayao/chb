@@ -96,7 +96,7 @@
                   pattern=".{10,}"
                   title="Please enter at least 10 characters"
                   placeholder="Enter property address"
-                  value="{{old('property_address')}}"
+                  value="@auth {{ Auth::user()->address }} @endauth"
                 />
               </div>
               <div class="col-md-10 col-sm-11 col-12 mx-auto my-4">

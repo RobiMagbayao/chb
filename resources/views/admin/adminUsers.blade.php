@@ -15,7 +15,7 @@
               class="d-inline-block align-top img-fluid"
               alt="logo"
           /></a>
-            <nav id="adminOptions" class="userlink nav nav-pills flex-column pt-3">
+            <nav id="adminOptions" class="userlink nav nav-pills flex-column">
               <a
                 id="adminHome"
                 class="nav-link"
@@ -25,7 +25,6 @@
               >
               <a class="nav-link" href="{{route('admin.adminQuotes')}}">Quotes</a>
               <a class="nav-link" href="{{route('admin.adminBookings')}}">Bookings</a>
-              <a class="nav-link" href="{{route('admin.adminMessages')}}">Messages</a>
               <a class="nav-link" href="{{route('admin.adminContactus')}}">Enquiries</a>
               <a
                 class="nav-link active ActiveOption text-white"
@@ -51,7 +50,7 @@
             
             <div class="row">
               <div class="card-header mb-3">
-                <a href="{{url('admin/users/create')}}" class="btn btn-success float-end">Add User</a>
+                <a href="{{url('admin/users/create')}}" class="btn btn-success btn-sm float-end">Add User</a>
               </div>
               <table>
                 <thead>
@@ -75,19 +74,6 @@
                       View
                       </button>
                     </td>
-                    <!--
-                    <td>
-                      <a href="{{url('admin/users/'.$item->id.'/edit')}}" class="btn btn-success btn-sm w-100 my-2">Update</a><br>
-                      <button type="button" class="btn btn-danger btn-sm w-100" data-bs-toggle="modal"
-                              data-bs-target="#deleteUserModal-{{ $item->id }}">
-                              Delete
-                      </button>
-                    </td>
-                    
-                    <td class="ps-3">
-                      
-                    </td>
-                  -->
                   </tr>
                     <!-- Modal for View User -->
                     <div class="modal fade" id="ViewUserModal-{{ $item->id }}" tabindex="-1"
@@ -109,11 +95,14 @@
                                 <strong>Password: </strong>{{$item->password}}<br>
                               </div>
                               <div class="modal-footer">
-                                <a href="{{url('admin/users/'.$item->id.'/edit')}}" class="btn btn-success btn-sm">Update</a><br>
-                                <button type="button" class="btn btn-danger btn-sm " data-bs-toggle="modal"
-                                        data-bs-target="#deleteUserModal-{{ $item->id }}">
-                                        Delete
-                                </button>
+                                <div class="d-flex w-100 m-0">
+                                  <a href="{{url('admin/users/'.$item->id.'/edit')}}" class="btn-success w-50 btn btn-sm my-1  mx-1 ">Update</a><br>
+                                  <button type="button" class="btn-danger w-50 btn btn-sm my-1  mx-1 " data-bs-toggle="modal"
+                                          data-bs-target="#deleteUserModal-{{ $item->id }}">
+                                          Delete
+                                  </button>
+                                </div>
+                                
                               </div>
                           </div>
                       </div>

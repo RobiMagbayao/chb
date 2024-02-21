@@ -30,7 +30,6 @@
                 >Quotes</a
               >
               <a class="nav-link" href="{{route('admin.adminBookings')}}">Bookings</a>
-              <a class="nav-link" href="{{route('admin.adminMessages')}}">Messages</a>
               <a class="nav-link" href="{{route('admin.adminContactus')}}">Enquiries</a>
               <a class="nav-link" href="{{route('admin.adminUsers')}}">Users</a>
               <a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('formLogout').submit();" class="nav-link">Logout</a>
@@ -60,7 +59,7 @@
                   <th class="col-1 text-center">Action</th>
                 </tr>
               </thead>
-              @foreach ($quote as $item)
+              @foreach ($quote as $item) 
               <tbody>
                 <tr>
                   <td class="p-2">{{$item->created_at->format('M d, Y')}}</td>
@@ -149,7 +148,7 @@
                         <div class="modal-footer">
                           <div class="d-flex w-100 m-0" >
                             <a class="w-50 btn btn-sm my-1 btn-primary mx-1" data-bs-toggle="modal" data-bs-target="#givequoteModal-{{ $item->id }}">Provide Quote</a>
-                            <a class="w-50 btn btn-sm my-1 btn-success mx-1" href="#">Book</a>
+                            <a href="{{ url('/admin/bookings/') }}" class="w-50 btn btn-sm my-1 btn-success" data-bs-toggle="modal" data-bs-target="#BookModal-{{ $item->id }}" >Book</a>
                           </div>
                           <div class="d-flex w-100 m-0">
                             <a class="w-50 btn btn-sm my-1 btn-secondary mx-1" href="{{url('/admin/quotes/'.$item->id.'/edit')}}">Edit</a>
@@ -226,6 +225,46 @@
                       </div>
                   </div>
               </div>
+
+              <!-- Modal for BOOK -->
+              <div class="modal fade" id="BookModal-{{ $item->id }}" tabindex="-1" aria-labelledby="BookModalLabel" aria-hidden="true" data-bs-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content pt-4 px-4">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="BookModalLabel">Book {{ $item->service_type }} Service</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form class="row" action="{{url('/admin/bookings')}}" method="POST">
+                            @csrf
+                            <div class="visually-hidden">
+                              <input type="text" name="user_id" value="{{ $item->user_id }}">
+                              <input type="text" name="quote_id" value="{{ $item->id }}">
+                            </div>
+                            <div>
+                              <div class="mb-3">
+                                  <label for="booking_date" class="userDetail form-label">Choose schedule date</label>
+                                  <input class="form-control" type="date" id="booking_date" name="booking_date" value="{{old('booking_date')}}" required>
+                                  @error('booking_date') <span class="text-danger">{{$message}}</span>  @enderror
+                              </div>
+                          </div>
+                          <div>
+                            <label class="form-label userDetail" for="booking_time">Choose schedule time</label>
+                            <select class="form-select service-border" aria-label="Select time" name="booking_time" id="booking_time">
+                                <option value="9 AM">9 AM</option>
+                                <option value="12 PM">12 PM</option>
+                                <option value="3 PM">3 PM</option>
+                            </select>
+                          </div>
+                    </div>
+                    <div class="text-center my-4">
+                      <button type="submit" class="btn btn-success btn-sm w-100">Confirm</button><br>
+                      <a href="{{url('/admin/quotes')}}" ><button type="button" class="btn btn-secondary btn-sm w-100 mt-2">Discard</button></a>
+                    </div>
+                    </form>
+                        </div>
+                    </div>
+                </div>
               @endforeach
             </table>
           </div>
@@ -234,7 +273,13 @@
     </section>
     <!--end of quotes dashbord-->
 
-  
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          @if($errors->any())
+              alert('{{ $errors->first() }}');
+          @endif
+      });
+  </script>
 
   
 
