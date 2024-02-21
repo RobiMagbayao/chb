@@ -56,21 +56,21 @@
                         <table>
                           <thead>
                             <tr class="tableheader p-3">
-                              <th class="col-2 p-2">Date</th>
-                              <th class="col-1 p-2">Time</th>
-                              <th class="col-3 p-2">Name</th>
-                              <th class="col-2 p-2">Service</th>
-                              <th class="col-2 p-2">Status</th>
+                              <th class="col-sm-2 col-1 py-2 px-sm-2 px-1">Date</th>
+                              <th class="col-1  py-2 px-sm-2 px-1">Time</th>
+                              <th class="col-2  py-2 px-sm-2 px-1">Name</th>
+                              <th class="col-2  py-2 px-sm-2 px-1">Service</th>
+                              <th class="col-sm-2 col-1  py-2 px-sm-2 px-1">Status</th>
                               <th class="col-1 text-center">Action</th>
                             </tr>
                           </thead>
                           @foreach ($booking as $item)
                           <tbody>
                             <tr>
-                              <td class="px-2 py-1">{{$item->booking_date}}</td>
-                              <td class="px-2 py-1">{{$item->booking_time}}</td>
-                              <td class="px-2 py-1">{{ $item->user->firstname }} {{ $item->user->lastname }}</td>
-                              <td class="px-2 py-1">{{$item->quote->service_type}}</td>
+                              <td class="px-sm-2 px-1 py-1">{{$item->booking_date}}</td>
+                              <td class="px-sm-2 px-1 py-1">{{$item->booking_time}}</td>
+                              <td class="px-sm-2 px-1 py-1">{{ $item->user->firstname }} {{ $item->user->lastname }}</td>
+                              <td class="px-sm-2 px-1 py-1">{{$item->quote->service_type}}</td>
                               @if ($item->quote->quote == 'Pending' || $item->quote->quote == '')
                                     <td><i class="bi bi-circle-fill" style="font-size: 8px; color:navy"></i> {{$item->quote->status}}</td>
                                 @else
