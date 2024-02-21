@@ -25,7 +25,7 @@
             >
             <a class="nav-link" href="{{route('admin.adminQuotes')}}">Quotes</a>
             <a class="nav-link" href="{{route('admin.adminBookings')}}">Bookings</a>
-            <a class="nav-link" href="{{route('admin.adminContactus')}}">Enquiries</a>
+            <a class="nav-link" href="{{route('admin.adminContactus')}}">Inquiries</a>
             <a class="nav-link" href="{{route('admin.adminUsers')}}">Users</a>
             <a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('formLogout').submit();" class="nav-link">Logout</a>
             <form action="{{route('logout')}}" method="POST" id="formLogout">@csrf</form>
@@ -50,7 +50,7 @@
           <div class="col-md-4 col-12 mb-md-5 mb-3">
             <div class="card admincard">
               <div class="card-body text-center">
-                <p class="card-title h5 pb-md-3">Pending Enquiries</p>
+                <p class="card-title h5 pb-md-3">Pending Inquiries</p>
                 <p class="card-text display-5">{{$pendingEnquiriesCount}}</p>
               </div>
             </div>

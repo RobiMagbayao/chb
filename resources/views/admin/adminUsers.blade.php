@@ -25,7 +25,7 @@
               >
               <a class="nav-link" href="{{route('admin.adminQuotes')}}">Quotes</a>
               <a class="nav-link" href="{{route('admin.adminBookings')}}">Bookings</a>
-              <a class="nav-link" href="{{route('admin.adminContactus')}}">Enquiries</a>
+              <a class="nav-link" href="{{route('admin.adminContactus')}}">Inquiries</a>
               <a
                 class="nav-link active ActiveOption text-white"
                 href="{{route('admin.adminUsers')}}"

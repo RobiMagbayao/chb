@@ -29,7 +29,7 @@
               >Quotes</a
             >
             <a class="nav-link" href="{{route('admin.adminBookings')}}">Bookings</a>
-            <a class="nav-link" href="{{route('admin.adminContactus')}}">Enquiries</a>
+            <a class="nav-link" href="{{route('admin.adminContactus')}}">Inquiries</a>
             <a class="nav-link" href="{{route('admin.adminUsers')}}">Users</a>
             <a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('formLogout').submit();" class="nav-link">Logout</a>
             <form action="{{route('logout')}}" method="POST" id="formLogout">@csrf</form>

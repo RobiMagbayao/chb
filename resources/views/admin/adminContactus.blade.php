@@ -28,7 +28,7 @@
                     <a
                         class="nav-link active ActiveOption text-white"
                         href="adminContactus.html"
-                    >Enquiries</a
+                    >Inquiries</a
                     >
                     <a class="nav-link" href="{{route('admin.adminUsers')}}">Users</a>
                     <a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('formLogout').submit();" class="nav-link">Logout</a>
@@ -40,7 +40,7 @@
             <div
             class="section-header text-center display-4 fw-bold mb-5 pb-md-3 pb-sm-0 pb-0"
           >
-          ENQUIRIES
+          INQUIRIES
           </div>
           @if (session('status'))
           <div class="alert alert-success text-center fw-bold">
@@ -91,7 +91,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="viewEnquiriesModalLabel">Enquiry from {{ $item->firstname }} </h1>
+                <h1 class="modal-title fs-5" id="viewEnquiriesModalLabel">Inquiry from {{ $item->firstname }} </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -101,7 +101,7 @@
                 <div class="py-1 px-2"><strong>Last Name : </strong>{{$item->lastname}}</div>
                 <div class="py-1 px-2"><strong>Email :  </strong>{{$item->email}}</div>
                 <div class="py-1 px-2"><strong>Phone : </strong>{{$item->phone}}</div>
-                <div class="py-1 px-2"><strong>Phone : </strong>{{$item->status}}</div>
+                <div class="py-1 px-2"><strong>Status : </strong>{{$item->status}}</div>
                 <div class="py-1 px-2"><strong>Message : </strong>{{$item->message}}</div>
                     
             </div>
@@ -198,11 +198,11 @@
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="deleteEnquiryModalLabel">Delete Enquiry From {{ $item->firstname }}?</h1>
+                <h1 class="modal-title fs-5" id="deleteEnquiryModalLabel">Delete Inquiry From {{ $item->firstname }}?</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete this enquiry?
+                Are you sure you want to delete this inquiry?
             </div>
             <div class="modal-footer">
               <a href="{{ url('/admin/contactus/'.$item->id) }}" class="btn btn-danger btn-sm w-100">Delete</a>
