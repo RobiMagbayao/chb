@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function () {
+    initialize();
+});
+
 function initialize() {
     const addressInput = document.getElementById("property_address");
     const latitudeInput = document.getElementById("address-latitude");
@@ -14,7 +18,7 @@ function initialize() {
         return;
     }
 
-    const defaultLocation = { lat: -34.397, lng: 150.644 }; // Default location if user address is not available
+    const defaultLocation = { lat: 37.756944, lng: -122.449 }; // Default location if user address is not available
     const map = new google.maps.Map(mapContainer, {
         zoom: 15,
         center: defaultLocation,

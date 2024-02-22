@@ -54,7 +54,7 @@
                 <div class="col-md-6 col-12 px-4 pb-3">
                     <div class="mb-3">
                         <label for="firstname" class="userDetail form-label">First Name</label>
-                        <input class="form-control" type="text" id="firstname" name="firstname" value="{{ old('firstname')}}" pattern=".{2,}" title="Please enter at least 2 characters" placeholder="Enter user's firstname">
+                        <input class="form-control" type="text" id="firstname" name="firstname" value="{{ old('firstname')}}" pattern=".{2,}" title="Please enter at least 2 characters" placeholder="Enter user's first name">
                         @error('firstname') <span class="text-danger">{{$message}}</span>  @enderror
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                       name="lastname"
                       pattern=".{2,}"
                       title="Please enter at least 2 characters"
-                      placeholder="Enter user's lastname"
+                      placeholder="Enter user's last name"
                     />
                     @error('lastname')
                         <span class="text-danger">{{$message}}</span>

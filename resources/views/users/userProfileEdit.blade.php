@@ -21,7 +21,7 @@
             <div class="col-md-6 col-12 px-4 pb-3">
                 <div class="mb-3">
                     <label for="firstname" class="userDetail form-label">First Name</label>
-                    <input class="form-control" type="text" id="firstname" name="firstname" value="@auth{{Auth::user()->firstname}}@endauth" pattern=".{2,}" title="Please enter at least 2 characters" placeholder="Enter your firstname">
+                    <input class="form-control" type="text" id="firstname" name="firstname" value="@auth{{Auth::user()->firstname}}@endauth" pattern=".{2,}" title="Please enter at least 2 characters" placeholder="Enter your first name">
                     @error('firstname') <span class="text-danger">{{$message}}</span>  @enderror
                 </div>
             </div>
@@ -38,7 +38,7 @@
                   name="lastname"
                   pattern=".{2,}"
                   title="Please enter at least 2 characters"
-                  placeholder="Enter your lasttname"
+                  placeholder="Enter your last name"
                 />
                 @error('lastname')
                     <span class="text-danger">{{$message}}</span>
@@ -96,7 +96,7 @@
             <div class="col-md-6 col-12 px-4 pb-3">
               <div class="mb-3">
                 <label for="password" class="userDetail form-label"
-                  >Password</label
+                  >New Password</label
                 >
                 <input
                   class="form-control"
@@ -105,7 +105,6 @@
                   name="password"
                   pattern=".{8,}"
                   title="Please enter at least 8 characters"
-                  value="@auth{{Auth::user()->password}}@endauth"
                   placeholder="Enter your new password"
                 />
                 @error('password') <span class="text-danger">{{$message}}</span>  @enderror

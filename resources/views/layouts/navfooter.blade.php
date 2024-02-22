@@ -217,7 +217,7 @@
           />
         </div>
         <div class="d-sm-none d-block text-center mb-3">
-          <img class="footer-img-sm" src="assets/images/logo2.png" alt="logo" />
+          <img class="footer-img-sm" src="/assets/images/logo2.png" alt="logo" />
         </div>
         <div
           class="footer-header col-md-4 col-sm-6 col-12 display-1 my-auto px-sm-2 px-0"
