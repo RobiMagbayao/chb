@@ -52,25 +52,25 @@
             <table>
               <thead>
                 <tr class="tableheader p-3">
-                  <th class="col-2 p-2">Date</th>
-                  <th class="col-2 p-2">Name</th>
-                  <th class="col-3 p-2">Service</th>
-                  <th class="col-2 p-2">Status</th>
+                  <th class="col-2 py-2 px-sm-2 px-1">Date</th>
+                  <th class="col-2 py-2 px-sm-2 px-1">Name</th>
+                  <th class="col-3 py-2 px-sm-2 px-1">Service</th>
+                  <th class="col-2 py-2 px-sm-2 px-1">Status</th>
                   <th class="col-1 text-center">Action</th>
                 </tr>
               </thead>
               @foreach ($quote as $item) 
               <tbody>
                 <tr>
-                  <td class="p-2">{{$item->created_at->format('M d, Y')}}</td>
-                  <td class="p-2">{{ $item->user->firstname }} {{ $item->user->lastname }}</td>
-                  <td class="p-2">{{$item->service_type}}</td>
+                  <td class="px-sm-2 px-1 py-1">{{$item->created_at->format('M d, Y')}}</td>
+                  <td class="px-sm-2 px-1 py-1">{{ $item->user->firstname }} {{ $item->user->lastname }}</td>
+                  <td class="px-sm-2 px-1 py-1">{{$item->service_type}}</td>
                   @if ($item->quote == 'Pending' || $item->quote == '')
-                      <td><i class="bi bi-circle-fill" style="font-size: 8px; color:navy"></i> {{$item->status}}</td>
+                      <td class="px-sm-2 px-1 py-1"><i class="bi bi-circle-fill" style="font-size: 8px; color:navy"></i> {{$item->status}}</td>
                   @else
-                      <td>{{$item->status}}</td>
+                      <td class="px-sm-2 px-1 py-1">{{$item->status}}</td>
                   @endif
-                  <td>
+                  <td class="py-1">
                     <button type="button" class="btn btn-sm btn-primary w-100" data-bs-toggle="modal" data-bs-target="#viewQuoteModal-{{ $item->id }}">
                       View
                     </button>
@@ -80,19 +80,18 @@
               </tbody>
               <!-- Modal for view Quote -->
               <div class="modal fade" id="viewQuoteModal-{{ $item->id }}" tabindex="-1" aria-labelledby="viewQuoteModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
+                <div class="modal-dialog modal-xl">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header col-12">
                             <h1 class="modal-title fs-5" id="viewQuoteModalLabel">{{ $item->service_type }} Quote Request</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body row">
+                          <div class="col-md-6 col-12">
                             <div class="px-2"><strong>Date Submitted : </strong>{{$item->created_at->format('M d, Y')}}</div>
                             <div class="px-2 py-1"><strong>Date Modified : </strong>{{$item->updated_at->format('M d, Y')}}</div>
                             <div class="py-1 px-2"><strong>Service : </strong>{{$item->service_type}}</div>
-
-                            <div class="py-1 px-2"><strong>Property Address : </strong>{{$item->property_address}}</div>
-                            
+                            <div class="py-1 px-2"><strong>Property Address : </strong><span class="address-{{$item->id}}">{{$item->property_address}}</span></div>
                             @if(isset($item->type_of_roof))
                               <div class="py-1 px-2"><strong>Roof Type : </strong>{{$item->type_of_roof}}</div>
                             @endif
@@ -143,8 +142,13 @@
                           <div class="py-1 px-2"><strong>Name : </strong>{{ $item->user->firstname }} {{ $item->user->lastname }}</div>
                           <div class="py-1 px-2"><strong>Email : </strong>{{ $item->user->email }}</div>
                           <div class="py-1 px-2"><strong>Phone : </strong>{{ $item->user->phone }}</div>
-                                
+                          </div>
+
+                          <!-- Map Container -->
+                          <div class="col-md-6 col-12  mt-md-0 mt-3" id="map-container-{{$item->id}}" style="height: 380px;"></div>
                         </div>
+                          
+                        
                         <div class="modal-footer">
                           <div class="d-flex w-100 m-0" >
                             <a class="w-50 btn btn-sm my-1 btn-primary mx-1" data-bs-toggle="modal" data-bs-target="#givequoteModal-{{ $item->id }}">Provide Quote</a>
@@ -155,9 +159,8 @@
                             <a class="w-50 btn btn-sm my-1 btn-danger mx-1" type="button" data-bs-toggle="modal" data-bs-target="#deleteQuoteModal-{{ $item->id }}">Delete</a>
                           </div>
                           
-                          
                       </div>
-                      
+                    </div>
                     </div>
                 </div>
               </div>
@@ -273,14 +276,90 @@
     </section>
     <!--end of quotes dashbord-->
 
-    <script>
+<script>
       document.addEventListener('DOMContentLoaded', function () {
           @if($errors->any())
               alert('{{ $errors->first() }}');
           @endif
       });
-  </script>
+</script>
 
-  
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.modal').forEach(function(modal) {
+        modal.addEventListener('shown.bs.modal', function () {
+            const quoteId = this.id.split('-').pop(); 
+            const address = this.querySelector(`#address-${quoteId}`).innerText;
+            initializeMapForQuote(quoteId, address);
+        });
+    });
+});
 
-    @endsection
+function initializeMapForQuote(quoteId, address) {
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ 'address': address }, function(results, status) {
+        if (status == 'OK') {
+            const location = results[0].geometry.location;
+            const mapContainer = document.getElementById(`map-container-${quoteId}`);
+            if (mapContainer) {
+                const map = new google.maps.Map(mapContainer, {
+                    zoom: 15,
+                    center: location,
+                });
+    
+                new google.maps.Marker({
+                    map: map,
+                    position: location,
+                    visible: true,
+                });
+            }
+        } else {
+            console.error('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+}
+
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCGIYPiPrtmT83wmyK8rtP_FbGo3hKoo&libraries=places"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    
+    document.querySelectorAll('.modal').forEach(function(modal) {
+        modal.addEventListener('shown.bs.modal', function () {
+            const quoteId = this.id.split('-').pop(); 
+            const addressElement = this.querySelector(`.address-${quoteId}`);
+            if (addressElement) {
+                const address = addressElement.innerText.trim();
+                initializeMapForQuote(`map-container-${quoteId}`, address);
+            }
+        });
+    });
+});
+
+function initializeMapForQuote(mapContainerId, address) {
+    const mapContainer = document.getElementById(mapContainerId);
+    const geocoder = new google.maps.Geocoder();
+    
+    geocoder.geocode({ 'address': address }, function(results, status) {
+        if (status === 'OK') {
+            const location = results[0].geometry.location;
+            const map = new google.maps.Map(mapContainer, {
+                zoom: 15,
+                center: location,
+            });
+    
+            new google.maps.Marker({
+                map: map,
+                position: location,
+                visible: true,
+            });
+        } else {
+            console.error('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+}
+
+</script>
+
+@endsection

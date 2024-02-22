@@ -56,9 +56,9 @@
                 <thead>
                   <tr class="tableheader p-3">
                     <th class="col-1 text-center">User ID</th>
-                    <th class="col-2 p-2">First Name</th>
-                    <th class="col-2 p-2">Last Name</th>
-                    <th class="col-3 p-2">Email</th>
+                    <th class="col-2 py-2 px-sm-2 px-1">First Name</th>
+                    <th class="col-2 py-2 px-sm-2 px-1">Last Name</th>
+                    <th class="col-3 py-2 px-sm-2 px-1">Email</th>
                     <th class="col-1 text-center">Action</th>
                   </tr>
                 </thead>
@@ -66,10 +66,10 @@
                   @foreach ($User as $item )
                   <tr>
                     <td class="text-center">{{$item->id}}</td>
-                    <td class="p-2">{{$item->firstname}}</td>
-                    <td class="p-2">{{$item->lastname}}</td>
-                    <td class="p-2">{{$item->email}}</td>
-                    <td><button type="button" class="btn btn-primary btn-sm w-100" data-bs-toggle="modal"
+                    <td class="px-sm-2 px-1 py-1">{{$item->firstname}}</td>
+                    <td class="px-sm-2 px-1 py-1">{{$item->lastname}}</td>
+                    <td class="px-sm-2 px-1 py-1">{{$item->email}}</td>
+                    <td class="py-1"><button type="button" class="btn btn-primary btn-sm w-100" data-bs-toggle="modal"
                       data-bs-target="#ViewUserModal-{{ $item->id }}">
                       View
                       </button>
@@ -142,6 +142,7 @@
 
     
 
-  
+    <script type="text/javascript" src="/assets/js/mapinput.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCGIYPiPrtmT83wmyK8rtP_FbGo3hKoo&libraries=places&callback=initialize" async defer></script>
 
 @endsection

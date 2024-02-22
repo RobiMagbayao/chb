@@ -103,7 +103,7 @@
                 id="address-longitude"
               />
             </div>
-            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto  visually-hidden">
+            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto">
               <div id="address-map-container" style="width: 100%;height:250px;">
                 <div style="width:100%;height:100%" id="address-map"></div>
               </div>

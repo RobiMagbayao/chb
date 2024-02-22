@@ -72,9 +72,9 @@
                               <td class="px-sm-2 px-1 py-1">{{ $item->user->firstname }} {{ $item->user->lastname }}</td>
                               <td class="px-sm-2 px-1 py-1">{{$item->quote->service_type}}</td>
                               @if ($item->quote->quote == 'Pending' || $item->quote->quote == '')
-                                    <td><i class="bi bi-circle-fill" style="font-size: 8px; color:navy"></i> {{$item->quote->status}}</td>
+                                    <td class="px-sm-2 px-1 py-1"><i class="bi bi-circle-fill" style="font-size: 8px; color:navy"></i> {{$item->quote->status}}</td>
                                 @else
-                                    <td>{{$item->quote->status}}</td>
+                                    <td class="px-sm-2 px-1 py-1">{{$item->quote->status}}</td>
                                 @endif
                               <td class="py-1">
                                 <button type="button" class="btn btn-sm btn-primary w-100 " data-bs-toggle="modal" data-bs-target="#viewBookModal-{{ $item->id }}">
@@ -85,65 +85,69 @@
                           </tbody>
                           <!-- Modal for view Book -->
                           <div class="modal fade" id="viewBookModal-{{ $item->id }}" tabindex="-1" aria-labelledby="viewBookModalLabel" aria-hidden="true">
-                            <div class="modal-dialog  modal-lg">
+                            <div class="modal-dialog  modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title fs-5" id="viewBookModalLabel">{{ $item->quote->service_type }} Book Details</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="px-2"><strong>Schedule Date : </strong>{{$item->booking_date}}</div>
-                                        <div class="px-2 py-1"><strong>Schedule Time : </strong>{{$item->booking_time}}</div>
-                                        <div class="py-1 px-2"><strong>Service : </strong>{{$item->quote->service_type}}</div>
-            
-                                        <div class="px-2"><strong>Property Address : </strong>{{$item->quote->property_address}}</div>
-                                        
-                                        @if(isset($item->quote->quote->type_of_roof))
-                                          <div class="py-1 px-2"><strong>Roof Type : </strong>{{$item->quote->type_of_roof}}</div>
-                                        @endif
-                
-                                        @if(isset($item->quote->gutter_size))
-                                            <div class="py-1 px-2"><strong>Gutter Size : </strong>{{$item->quote->gutter_size}}</div>
-                                        @endif
-                
-                                        @if(isset($item->quote->gutter_length))
-                                            <div class="py-1 px-2"><strong>Gutter Length : </strong>{{$item->quote->gutter_length}}</div>
-                                        @endif
-                
-                                        @if(isset($item->quote->with_gutter_guard))
-                                            <div class="py-1 px-2"><strong>With gutter guard? :</strong> {{$item->quote->with_gutter_guard}}</div>
-                                        @endif
-                
-                                        @if(isset($item->quote->window_qty))
-                                            <div class="py-1 px-2"><strong>Window Quantity : </strong>{{$item->quote->window_qty}}</div>
-                                        @endif
-            
-                                        @if(isset($item->quote->solar_qty))
-                                            <div class="py-1 px-2"><strong>Solar Quantity : </strong>{{$item->quote->solar_qty}}</div>
-                                        @endif
-            
-                                        @if(isset($item->quote->with_algae))
-                                            <div class="py-1 px-2"><strong>With stains or algae? : </strong> {{$item->quote->with_algae}}</div>
-                                        @endif
-            
-                                        @if(isset($item->quote->type_of_area))
-                                            <div class="py-1 px-2"><strong>Area to clean : </strong>{{$item->quote->type_of_area}}</div>
-                                        @endif
-            
-                                        @if(isset($item->quote->area_size))
-                                            <div class="py-1 px-2"><strong>Area Size : </strong>{{$item->quote->area_size}}</div>
-                                        @endif
-            
-                                        @if(isset($item->quote->comment))
-                                            <div class="py-1 px-2"><strong>Message : </strong>{{$item->quote->comment}}</div>
-                                        @endif
-            
-                                        @if(!empty($item->quote->photo))
-                                            <div class="py-2 px-2"><strong>Uploaded Photo : <br></strong><img src="/uploads/quotes/{{$item->quote->photo}}" alt="uploaded photo" style="max-height: 300px"></div>
-                                        @endif
-            
-                                      <div class="px-2"><strong>Quote : </strong>{{$item->quote->quote}}</div>
-                                      <div class="px-2"><strong>Status : </strong>{{$item->quote->status}}</div>
+                                    <div class="modal-body row">
+                                      <div class="col-md-6 col-12">
+                                          <div class="px-2"><strong>Schedule Date : </strong>{{$item->booking_date}}</div>
+                                          <div class="px-2 py-1"><strong>Schedule Time : </strong>{{$item->booking_time}}</div>
+                                          <div class="py-1 px-2"><strong>Service : </strong>{{$item->quote->service_type}}</div>
+              
+                                          <div class="py-1 px-2"><strong>Property Address : </strong><span class="address-{{$item->id}}">{{$item->quote->property_address}}</span></div>
+                                          
+                                          @if(isset($item->quote->quote->type_of_roof))
+                                            <div class="py-1 px-2"><strong>Roof Type : </strong>{{$item->quote->type_of_roof}}</div>
+                                          @endif
+                  
+                                          @if(isset($item->quote->gutter_size))
+                                              <div class="py-1 px-2"><strong>Gutter Size : </strong>{{$item->quote->gutter_size}}</div>
+                                          @endif
+                  
+                                          @if(isset($item->quote->gutter_length))
+                                              <div class="py-1 px-2"><strong>Gutter Length : </strong>{{$item->quote->gutter_length}}</div>
+                                          @endif
+                  
+                                          @if(isset($item->quote->with_gutter_guard))
+                                              <div class="py-1 px-2"><strong>With gutter guard? :</strong> {{$item->quote->with_gutter_guard}}</div>
+                                          @endif
+                  
+                                          @if(isset($item->quote->window_qty))
+                                              <div class="py-1 px-2"><strong>Window Quantity : </strong>{{$item->quote->window_qty}}</div>
+                                          @endif
+              
+                                          @if(isset($item->quote->solar_qty))
+                                              <div class="py-1 px-2"><strong>Solar Quantity : </strong>{{$item->quote->solar_qty}}</div>
+                                          @endif
+              
+                                          @if(isset($item->quote->with_algae))
+                                              <div class="py-1 px-2"><strong>With stains or algae? : </strong> {{$item->quote->with_algae}}</div>
+                                          @endif
+              
+                                          @if(isset($item->quote->type_of_area))
+                                              <div class="py-1 px-2"><strong>Area to clean : </strong>{{$item->quote->type_of_area}}</div>
+                                          @endif
+              
+                                          @if(isset($item->quote->area_size))
+                                              <div class="py-1 px-2"><strong>Area Size : </strong>{{$item->quote->area_size}}</div>
+                                          @endif
+              
+                                          @if(isset($item->quote->comment))
+                                              <div class="py-1 px-2"><strong>Message : </strong>{{$item->quote->comment}}</div>
+                                          @endif
+              
+                                          @if(!empty($item->quote->photo))
+                                              <div class="py-2 px-2"><strong>Uploaded Photo : <br></strong><img src="/uploads/quotes/{{$item->quote->photo}}" alt="uploaded photo" style="max-height: 300px"></div>
+                                          @endif
+              
+                                        <div class="px-2"><strong>Quote : </strong>{{$item->quote->quote}}</div>
+                                        <div class="px-2"><strong>Status : </strong>{{$item->quote->status}}</div>
+                                      </div>
+                                      <!-- Map Container -->
+                                      <div class="col-md-6 col-12 mt-md-0 mt-3" id="map-container-{{$item->id}}" style="height: 380px;"></div>
                                     
                                     </div>
                                     <div class="modal-footer">
@@ -251,11 +255,93 @@
             </div>
         </section>
         <!--end of bookings dashbord-->
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                @if($errors->any())
-                    alert('{{ $errors->first() }}');
-                @endif
-            });
-        </script>
-        @endsection
+      <!--for error if same date-->
+      <script>
+          document.addEventListener('DOMContentLoaded', function () {
+              @if($errors->any())
+                  alert('{{ $errors->first() }}');
+              @endif
+          });
+      </script>
+
+<!--for Google map-->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+   document.querySelectorAll('.modal').forEach(function(modal) {
+       modal.addEventListener('shown.bs.modal', function () {
+           const quoteId = this.id.split('-').pop(); 
+           const address = this.querySelector(`#address-${quoteId}`).innerText; 
+           initializeMapForQuote(quoteId, address);
+       });
+   });
+});
+
+function initializeMapForQuote(quoteId, address) {
+   const geocoder = new google.maps.Geocoder();
+   geocoder.geocode({ 'address': address }, function(results, status) {
+       if (status == 'OK') {
+           const location = results[0].geometry.location;
+           const mapContainer = document.getElementById(`map-container-${quoteId}`);
+           if (mapContainer) {
+               const map = new google.maps.Map(mapContainer, {
+                   zoom: 15,
+                   center: location,
+               });
+   
+               new google.maps.Marker({
+                   map: map,
+                   position: location,
+                   visible: true,
+               });
+           }
+       } else {
+           console.error('Geocode was not successful for the following reason: ' + status);
+       }
+   });
+}
+
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCGIYPiPrtmT83wmyK8rtP_FbGo3hKoo&libraries=places"></script>
+<script>
+ document.addEventListener('DOMContentLoaded', function () {
+
+   document.querySelectorAll('.modal').forEach(function(modal) {
+       modal.addEventListener('shown.bs.modal', function () {
+           const quoteId = this.id.split('-').pop(); 
+           const addressElement = this.querySelector(`.address-${quoteId}`);
+           if (addressElement) {
+               const address = addressElement.innerText.trim();
+               initializeMapForQuote(`map-container-${quoteId}`, address);
+           }
+       });
+   });
+});
+
+function initializeMapForQuote(mapContainerId, address) {
+   const mapContainer = document.getElementById(mapContainerId);
+   const geocoder = new google.maps.Geocoder();
+   
+   geocoder.geocode({ 'address': address }, function(results, status) {
+       if (status === 'OK') {
+           const location = results[0].geometry.location;
+           const map = new google.maps.Map(mapContainer, {
+               zoom: 15,
+               center: location,
+           });
+   
+           new google.maps.Marker({
+               map: map,
+               position: location,
+               visible: true,
+           });
+       } else {
+           console.error('Geocode was not successful for the following reason: ' + status);
+       }
+   });
+}
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCGIYPiPrtmT83wmyK8rtP_FbGo3hKoo&libraries=places&callback=initialize" async defer></script>
+@endsection

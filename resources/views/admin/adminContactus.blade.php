@@ -51,31 +51,31 @@
                 <table>
                   <thead>
                     <tr class="tableheader p-3">
-                        <th class="col-2 p-2">Date</th>
-                        <th class="col-2 p-2">Email</th>
-                        <th class="col-2 p-2">Name</th>
-                        <th class="col-2 p-2">Status</th>
+                        <th class="col-2 py-2 px-sm-2 px-1">Date</th>
+                        <th class="col-2 py-2 px-sm-2 px-1">Email</th>
+                        <th class="col-2 py-2 px-sm-2 px-1">Name</th>
+                        <th class="col-2 py-2 px-sm-2 px-1">Status</th>
                         <th class="col-1 text-center">Action</th>
                     </tr>
                   </thead>
                   @foreach($contactMessages as $item)
-                                <tbody>
-                                <tr class="">
-                                    <td class="px-2 py-1">{{ $item->created_at->format('M d, Y') }}</td>
-                                    <td class="px-2 py-1">{{ $item->email }}</td>
-                                    <td class="px-2 py-1">{{ $item->firstname }} {{ $item->lastname }}</td>
-                                    @if ($item->status == 'Pending')
-                                      <td class="px-2 py-1"><i class="bi bi-circle-fill" style="font-size: 8px; color:navy"></i> {{ $item->status }}</td>
-                                    @else
-                                      <td class="px-2 py-1">{{ $item->status }}</td>
-                                    @endif
-                                    <td class="py-1">
-                                      <button type="button" class="btn btn-sm btn-primary w-100" data-bs-toggle="modal" data-bs-target="#viewEnquiriesModal-{{ $item->id }}">
-                                        View
-                                      </button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                      <tbody>
+                        <tr class="">
+                            <td class="px-sm-2 px-1 py-1">{{ $item->created_at->format('M d, Y') }}</td>
+                            <td class="px-sm-2 px-1 py-1">{{ $item->email }}</td>
+                            <td class="px-sm-2 px-1 py-1">{{ $item->firstname }} {{ $item->lastname }}</td>
+                            @if ($item->status == 'Pending')
+                              <td class="px-sm-2 px-1 py-1"><i class="bi bi-circle-fill" style="font-size: 8px; color:navy"></i> {{ $item->status }}</td>
+                            @else
+                              <td class="px-sm-2 px-1 py-1">{{ $item->status }}</td>
+                            @endif
+                            <td class="px-sm-2 px-1 py-1">
+                              <button type="button" class="btn btn-sm btn-primary w-100" data-bs-toggle="modal" data-bs-target="#viewEnquiriesModal-{{ $item->id }}">
+                                View
+                              </button>
+                            </td>
+                        </tr>
+                    </tbody>
                   @endforeach
                 </table>
               </div>

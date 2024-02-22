@@ -129,7 +129,7 @@
                 pattern=".{10,}"
                 title="Please enter at least 10 characters"
                 placeholder="Enter property address"
-                value="@auth {{ Auth::user()->address }} @endauth"
+                value="@auth{{Auth::user()->address}}@endauth"
               />
             </div>
             <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto  visually-hidden">
@@ -152,7 +152,7 @@
                 id="address-longitude"
               />
             </div>
-            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto  visually-hidden">
+            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto">
               <div id="address-map-container" style="width: 100%;height:250px;">
                 <div style="width:100%;height:100%" id="address-map"></div>
               </div>

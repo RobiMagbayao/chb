@@ -77,49 +77,25 @@
                       disabled
                     />
                 </div>
-                  <!--GOOGLE MAP API-->
+
+                <!-- Status -->
             <div class="col-md-6 col-12 my-3 mx-auto">
-              <label class="form-label fw-bold" for="property_address"
-                >Enter property address</label
-              >
-              <input
-                class="form-control map-input"
-                type="text"
-                id="property_address"
-                name="property_address"
-                required
-                pattern=".{10,}"
-                title="Please enter at least 10 characters"
-                placeholder="Enter property address"
-                value="{{$quote->property_address}}"
-              />
+              <label class="form-label fw-bold" for="status">Status</label>
+              <select class="form-select service-border" aria-label="Select status" name="status" id="status">
+                  <option value="Pending" {{ $quote->status == 'Pending' ? 'selected' : '' }}>Pending</option>
+                  <option value="With quote" {{ $quote->status == 'With quote' ? 'selected' : '' }}>With quote</option>
+                  <option value="Booked" {{ $quote->status == 'Booked' ? 'selected' : '' }}>Booked</option>
+                  <option value="Completed (paid)" {{ $quote->status == 'Completed (paid)' ? 'selected' : '' }}>Completed (paid)</option>
+                  <option value="Completed (unpaid)" {{ $quote->status == 'Completed (unpaid)' ? 'selected' : '' }}>Completed (unpaid)</option>
+                  <option value="Cancelled" {{ $quote->status == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>  
+              </select>
             </div>
-            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto  visually-hidden">
-              <label class="form-label fw-bold" for="address-latitude"
-                >Latitude</label
-              >
-              <input
-                class="form-control"
-                type="text"
-                id="address-latitude"
-              />
+                  
+             <!-- Quote -->
+             <div class="col-md-6 col-12 my-3">
+              <label class="form-label fw-bold" for="quote">Quote</label>
+              <textarea class="form-control" maxlength="255" name="quote" id="quote" rows="2">{{ $quote->quote }}</textarea>
             </div>
-            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto visually-hidden">
-              <label class="form-label fw-bold" for="address-longitude"
-                >Longitude</label
-              >
-              <input
-                class="form-control"
-                type="text"
-                id="address-longitude"
-              />
-            </div>
-            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto  visually-hidden">
-              <div id="address-map-container" style="width: 100%;height:250px;">
-                <div style="width:100%;height:100%" id="address-map"></div>
-              </div>
-            </div>
-            <!--GOOGLE MAP API-->
 
                 <!--Roof Type-->
                 <div class="col-md-6 col-12 my-3 mx-auto">
@@ -256,24 +232,51 @@
               />
             </div>
 
-            <!-- Status -->
-            <div class="col-md-6 col-12 my-3 mx-auto">
-              <label class="form-label fw-bold" for="status">Status</label>
-              <select class="form-select service-border" aria-label="Select status" name="status" id="status">
-                  <option value="Pending" {{ $quote->status == 'Pending' ? 'selected' : '' }}>Pending</option>
-                  <option value="With quote" {{ $quote->status == 'With quote' ? 'selected' : '' }}>With quote</option>
-                  <option value="Booked" {{ $quote->status == 'Booked' ? 'selected' : '' }}>Booked</option>
-                  <option value="Completed (paid)" {{ $quote->status == 'Completed (paid)' ? 'selected' : '' }}>Completed (paid)</option>
-                  <option value="Completed (unpaid)" {{ $quote->status == 'Completed (unpaid)' ? 'selected' : '' }}>Completed (unpaid)</option>
-                  <option value="Cancelled" {{ $quote->status == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>  
-              </select>
-            </div>
+           
 
-            <!-- Quote -->
-            <div class="col-md-6 col-12 my-3">
-              <label class="form-label fw-bold" for="quote">Quote</label>
-              <textarea class="form-control" maxlength="255" name="quote" id="quote" rows="2">{{ $quote->quote }}</textarea>
+            <!--GOOGLE MAP API-->
+            <div class="col-12 my-3">
+              <label class="form-label fw-bold" for="property_address"
+                >Enter property address</label
+              >
+              <input
+                class="form-control map-input"
+                type="text"
+                id="property_address"
+                name="property_address"
+                required
+                pattern=".{10,}"
+                title="Please enter at least 10 characters"
+                placeholder="Enter property address"
+                value="{{$quote->property_address}}"
+              />
+              
             </div>
+            <div id="address-map-container pt-2" style="width: 100%;height:250px;">
+              <div style="width:100%;height:100%" id="address-map"></div>
+            </div>
+            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto  visually-hidden">
+              <label class="form-label fw-bold" for="address-latitude"
+                >Latitude</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                id="address-latitude"
+              />
+            </div>
+            <div class="col-md-10 col-sm-11 col-12 my-4 mx-auto visually-hidden">
+              <label class="form-label fw-bold" for="address-longitude"
+                >Longitude</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                id="address-longitude"
+              />
+            </div>
+         
+            <!--GOOGLE MAP API-->
 
             
               
@@ -289,5 +292,6 @@
     </section>
     <!--end of user dashbord-->
 
-
+    <script type="text/javascript" src="/assets/js/mapinput.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCGIYPiPrtmT83wmyK8rtP_FbGo3hKoo&libraries=places&callback=initialize" async defer></script>
 @endsection

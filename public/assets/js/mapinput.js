@@ -1,7 +1,10 @@
 function initialize() {
     const addressInput = document.getElementById("property_address");
-    if (!addressInput) {
-        console.error("Address input not found");
+    const latitudeInput = document.getElementById("address-latitude");
+    const longitudeInput = document.getElementById("address-longitude");
+
+    if (!addressInput || !latitudeInput || !longitudeInput) {
+        console.error("Inputs not found");
         return;
     }
 
@@ -11,16 +14,15 @@ function initialize() {
         return;
     }
 
-    // Initialize the map
+    const defaultLocation = { lat: -34.397, lng: 150.644 }; // Default location if user address is not available
     const map = new google.maps.Map(mapContainer, {
         zoom: 15,
-        center: { lat: -34.397, lng: 150.644 },
+        center: defaultLocation,
     });
 
-    // Initialize the marker but do not place it yet
     const marker = new google.maps.Marker({
         map: map,
-        visible: false,
+        visible: true,
     });
 
     const autocomplete = new google.maps.places.Autocomplete(addressInput);
@@ -33,28 +35,30 @@ function initialize() {
             return;
         }
 
-        // Update the map's center and the marker's position and visibility
         map.setCenter(place.geometry.location);
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
 
-        // Update the latitude and longitude inputs with the selected place's info
         updateLocationInputs(
             place.geometry.location.lat(),
             place.geometry.location.lng()
         );
     });
-}
 
-function updateLocationInputs(lat, lng) {
-    const latitudeInput = document.getElementById("address-latitude");
-    const longitudeInput = document.getElementById("address-longitude");
-
-    if (latitudeInput && longitudeInput) {
-        latitudeInput.value = lat;
-        longitudeInput.value = lng;
-    } else {
-        console.error("Latitude and/or Longitude inputs not found");
+    // Use the Auth address if available
+    if (addressInput.value.trim() !== "") {
+        const geocoder = new google.maps.Geocoder();
+        geocoder.geocode(
+            { address: addressInput.value },
+            function (results, status) {
+                if (status === "OK") {
+                    const userLocation = results[0].geometry.location;
+                    map.setCenter(userLocation);
+                    marker.setPosition(userLocation);
+                    marker.setVisible(true);
+                }
+            }
+        );
     }
 }
 

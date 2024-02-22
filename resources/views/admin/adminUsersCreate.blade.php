@@ -54,7 +54,7 @@
                 <div class="col-md-6 col-12 px-4 pb-3">
                     <div class="mb-3">
                         <label for="firstname" class="userDetail form-label">First Name</label>
-                        <input class="form-control" type="text" id="firstname" name="firstname" value="{{ old('firstname')}}" pattern=".{2,}" title="Please enter at least 2 characters">
+                        <input class="form-control" type="text" id="firstname" name="firstname" value="{{ old('firstname')}}" pattern=".{2,}" title="Please enter at least 2 characters" placeholder="Enter user's firstname">
                         @error('firstname') <span class="text-danger">{{$message}}</span>  @enderror
                     </div>
                 </div>
@@ -71,6 +71,7 @@
                       name="lastname"
                       pattern=".{2,}"
                       title="Please enter at least 2 characters"
+                      placeholder="Enter user's lastname"
                     />
                     @error('lastname')
                         <span class="text-danger">{{$message}}</span>
@@ -86,6 +87,7 @@
                       id="email"
                       value="{{ old('email')}}"
                       name="email"
+                      placeholder="Enter user's email"
                     />
                     @error('email') <span class="text-danger">{{$message}}</span>  @enderror
                   </div>
@@ -101,6 +103,7 @@
                       name="phone"
                       pattern="[0-9]{10}"
                       title="Please enter a valid 10-digit phone number"
+                      placeholder="Enter user's phone"
                     />
                     @error('phone') <span class="text-danger">{{$message}}</span>  @enderror
                   </div>
@@ -118,6 +121,7 @@
                       name="name"
                       pattern=".{2,}"
                       title="Please enter at least 2 characters"
+                      placeholder="Enter user's username"
                     />
                     @error('name') <span class="text-danger">{{$message}}</span>  @enderror
                   </div>
@@ -133,6 +137,7 @@
                       id="password"
                       name="password"
                       value="{{ old('password')}}"
+                      placeholder="Enter user's password"
                     />
                     @error('password') <span class="text-danger">{{$message}}</span>  @enderror
                   </div>
@@ -141,7 +146,7 @@
                 <div class="col-12 px-4 pb-1">
                     <div class="mb-3">
                         <label for="property_address" class="userDetail form-label">Address</label>
-                        <input class="form-control  map-input" type="text" id="property_address" name="address" value="{{ old('address')}}" pattern=".{10,}" title="Please enter at least 10 characters">
+                        <input class="form-control  map-input" type="text" id="property_address" name="address" value="{{ old('address')}}" pattern=".{10,}" title="Please enter at least 10 characters" placeholder="Enter user's address">
                         @error('address') <span class="text-danger">{{$message}}</span>  @enderror
                     </div>
                 </div>
@@ -184,5 +189,6 @@
     </section>
     <!--end of user dashbord-->
 
-
+    <script type="text/javascript" src="/assets/js/mapinput.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCGIYPiPrtmT83wmyK8rtP_FbGo3hKoo&libraries=places&callback=initialize" async defer></script>
 @endsection
