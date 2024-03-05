@@ -321,7 +321,7 @@ function initializeMapForQuote(quoteId, address) {
 
 </script>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPCGIYPiPrtmT83wmyK8rtP_FbGo3hKoo&libraries=places"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=APIKEY&libraries=places"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     
